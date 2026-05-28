@@ -73,8 +73,10 @@ function ProjectCard({
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-xl font-bold text-foreground tracking-tight">
-              {project.name}
+            <h3 className="text-xl font-bold text-foreground tracking-tight hover:text-primary transition-colors duration-200">
+              <Link href={`/projects/${project.slug}`}>
+                {project.name}
+              </Link>
             </h3>
             <p className="text-xs font-semibold text-muted-foreground tracking-wide font-mono uppercase">
               {project.tagline}
@@ -154,6 +156,15 @@ function ProjectCard({
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {project.humanNote}
                 </p>
+              </div>
+              <div className="pt-2">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wide text-foreground hover:text-primary transition-colors duration-200"
+                >
+                  Read full case study
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
             </div>
           </motion.div>
