@@ -78,11 +78,12 @@ No fake awards, no fake clients, no fake metrics.
 ### Must remain believable
 The site should feel authentic to a fresher who is strong for startup roles.
 
-### Must be deployable
-Build it so that it can:
-- live on GitHub
-- deploy on Vercel
-- support future updates easily
+### Must be deployable (Vercel-first via GitHub Integration)
+Build it so that it:
+- is fully optimized for Vercel deployment with direct GitHub repository synchronization
+- supports automated CI/CD previews on Vercel for every git push
+- ensures that all codebase updates and framework configurations are 100% compatible with Vercel's runtime
+- supports future updates and scaling seamlessly without manual redeployment
 
 ### Must be maintainable
 Do not create a design that only looks good once and becomes painful to edit.
@@ -680,14 +681,16 @@ Avoid creating a fake corporate brand identity.
 
 ## 19) Media assets
 
-Prepare or create:
-- professional headshot
-- portfolio hero image
-- project screenshots
-- maybe one “build desk” image
-- simple icons where needed
+Use the curated assets located in the project:
+- Source path: `next-app/images/`
+- Standard assets to utilize:
+  - `ChatGPT Image May 28, 2026, 08_19_13 PM.png`
+  - `ChatGPT Image May 28, 2026, 08_23_33 PM.png`
+- Integration rules:
+  - Reference them properly in components to display mockups, layout concepts, schemas, or diagrams as specified in their corresponding sections.
+  - To support Vercel hosting, keep asset names, paths, and casing exact (case-sensitive Unix compatibility).
 
-Do not overload the site with generated imagery.
+Do not overload the site with external/ad-hoc generated imagery; prioritize using these local curated assets.
 
 ---
 
@@ -701,13 +704,15 @@ Do not overload the site with generated imagery.
 - include setup instructions
 - include deployment notes if needed
 
-### Vercel workflow
-- connect repo
-- use environment variables properly
-- deploy preview branches
-- ensure production build passes
-- fix image paths and route handling
-- test redirects if using route-based pages
+### Vercel & GitHub integration workflow
+- connect the repository to Vercel via GitHub for auto-deployment
+- ensure all codebase updates support standard Vercel configurations and environments
+- run local production builds (`npm run build`) before pushing to GitHub to verify Vercel build compatibility
+- use environment variables properly inside the Vercel dashboard
+- deploy preview branches to test features before merging to `main`
+- ensure production build passes without warning/error blockages
+- fix and verify image paths (especially case-sensitivity on Vercel's linux environment) and route handling
+- test redirects and rewrites if using route-based pages
 
 ### Release discipline
 Before final deployment:
