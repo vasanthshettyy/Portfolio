@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useTheme } from "next-themes"
 import { Moon, Sun, Menu } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
@@ -54,10 +55,16 @@ export function Navbar() {
           className="flex items-center gap-2.5 group"
           aria-label="Vasanth Shetty — Home"
         >
-          <span className="flex items-center justify-center w-7 h-7 rounded-md bg-primary text-primary-foreground text-xs font-bold font-mono tracking-tight group-hover:scale-105 transition-transform">
-            {personal.initials}
-          </span>
-          <span className="text-sm font-semibold text-foreground/80 hidden sm:inline group-hover:text-foreground transition-colors">
+          <div className="relative w-7 h-7 rounded-full overflow-hidden border border-border group-hover:scale-105 transition-transform duration-300">
+            <Image
+              src="/headshot.png"
+              alt="Vasanth Shetty headshot"
+              fill
+              className="object-cover object-top"
+              sizes="28px"
+            />
+          </div>
+          <span className="text-sm font-semibold text-foreground/90 hidden sm:inline group-hover:text-foreground transition-colors">
             {personal.name}
           </span>
         </Link>
