@@ -43,29 +43,29 @@ export function AboutSection() {
     <AnimatedSection
       id="about"
       aria-label="About Vasanth Shetty"
-      className="py-24 px-6"
+      className="py-28 px-6"
     >
       <div className="mx-auto max-w-6xl">
-        {/* Hero area — text + desk image */}
-        <div className="grid lg:grid-cols-5 gap-10 lg:gap-16 mb-14 items-center">
-          {/* Text — 3 cols */}
-          <div className="lg:col-span-3">
-            <span className="label-mono mb-3 block">About</span>
-            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-4">
+        {/* Section title & Desk Image row */}
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 mb-16 items-center">
+          {/* Text block */}
+          <div className="lg:col-span-3 space-y-4">
+            <span className="label-mono tracking-wider font-semibold text-primary">About</span>
+            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight">
               Not a student doing projects.{" "}
-              <span className="text-brand-gradient">
+              <span className="opacity-60 block text-foreground font-semibold">
                 A builder who happens to be studying.
               </span>
             </h2>
-            <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
+            <p className="text-muted-foreground text-[15px] leading-relaxed max-w-2xl">
               {personal.bio}
             </p>
           </div>
 
-          {/* Desk image — 2 cols */}
+          {/* Desk Image - Apple Rounded squircle */}
           <StaggerGroup className="lg:col-span-2">
             <AnimatedDiv variants={scaleIn}>
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border/60 brand-glow">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/[0.06] shadow-xl">
                 <Image
                   src="/desk.png"
                   alt="Vasanth Shetty at his build desk with laptop and books"
@@ -73,29 +73,28 @@ export function AboutSection() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                {/* Subtle overlay for dark mode blending */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
               </div>
             </AnimatedDiv>
           </StaggerGroup>
         </div>
 
-        {/* Pillars grid */}
-        <StaggerGroup className="grid sm:grid-cols-2 gap-5">
+        {/* Pillars dynamic grid */}
+        <StaggerGroup className="grid sm:grid-cols-2 gap-6">
           {pillars.map((pillar) => {
             const Icon = pillar.icon
             return (
               <AnimatedDiv key={pillar.title} variants={fadeUp}>
-                <div className="card-surface-raised p-6 h-full group hover:border-primary/30 transition-all duration-200">
-                  <div className="flex items-start gap-4">
-                    <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 text-primary shrink-0 group-hover:bg-primary/15 transition-colors">
-                      <Icon className="w-4 h-4" />
+                <div className="card-surface-raised p-7 h-full group ios-hover border border-white/[0.04] bg-surface-raised/40 hover:border-white/[0.1] rounded-3xl">
+                  <div className="flex items-start gap-4.5">
+                    <span className="flex items-center justify-center w-10 h-10 rounded-2xl bg-foreground/[0.04] text-foreground shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                      <Icon className="w-4.5 h-4.5" />
                     </span>
-                    <div>
-                      <h3 className="text-sm font-semibold text-foreground mb-2">
+                    <div className="space-y-1.5">
+                      <h3 className="text-sm font-semibold text-foreground tracking-tight">
                         {pillar.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                      <p className="text-[13px] text-muted-foreground leading-relaxed">
                         {pillar.description}
                       </p>
                     </div>
@@ -106,25 +105,25 @@ export function AboutSection() {
           })}
         </StaggerGroup>
 
-        {/* Education strip */}
+        {/* Apple widget education status panel */}
         <StaggerGroup className="mt-8">
           <AnimatedDiv variants={fadeUp}>
-            <div className="px-5 py-4 rounded-xl border border-border/60 bg-surface flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-              <div>
-                <span className="label-mono block mb-0.5">Degree</span>
-                <span className="text-sm font-medium text-foreground">
+            <div className="px-6 py-5 rounded-3xl border border-white/[0.05] bg-surface/30 backdrop-blur-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div className="space-y-1">
+                <span className="label-mono text-[9px] block text-muted-foreground/75 font-semibold">DEGREE</span>
+                <span className="text-[14px] font-semibold text-foreground">
                   {personal.degree} — Computer Applications
                 </span>
               </div>
-              <div className="sm:border-l border-border/50 sm:pl-8">
-                <span className="label-mono block mb-0.5">CGPA</span>
-                <span className="text-sm font-medium text-primary">
-                  {personal.cgpa} / 10 (up to Semester 5)
+              <div className="sm:border-l border-white/[0.06] sm:pl-8 flex-1 space-y-1">
+                <span className="label-mono text-[9px] block text-muted-foreground/75 font-semibold">CGPA</span>
+                <span className="text-[14px] font-semibold text-foreground">
+                  {personal.cgpa} / 10 <span className="text-[11px] text-muted-foreground font-normal">(up to Sem 5)</span>
                 </span>
               </div>
-              <div className="sm:border-l border-border/50 sm:pl-8">
-                <span className="label-mono block mb-0.5">Graduating</span>
-                <span className="text-sm font-medium text-foreground">
+              <div className="sm:border-l border-white/[0.06] sm:pl-8 space-y-1">
+                <span className="label-mono text-[9px] block text-muted-foreground/75 font-semibold">GRADUATING YEAR</span>
+                <span className="text-[14px] font-semibold text-foreground">
                   {personal.graduationYear}
                 </span>
               </div>

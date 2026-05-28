@@ -22,7 +22,6 @@ import {
   fadeIn,
   scaleIn,
   slideInRight,
-  defaultTransition,
   useReducedMotion,
 } from "@/components/motion"
 
@@ -46,7 +45,7 @@ function TypingLine({
   return (
     <span
       className={cn(
-        "transition-opacity duration-500",
+        "transition-opacity duration-600",
         visible ? "opacity-100" : "opacity-0",
         className
       )}
@@ -56,107 +55,107 @@ function TypingLine({
   )
 }
 
-// ─── Terminal mini panel ───────────────────────────────────────────────
+// ─── Xcode / Terminal mini panel ───────────────────────────────────────
 function TerminalPanel() {
   return (
-    <div className="card-surface brand-glow relative overflow-hidden">
-      {/* Terminal header bar */}
-      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/60 bg-surface-raised">
-        <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-        <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-        <span className="ml-3 text-xs text-muted-foreground font-mono">
-          vasanth@portfolio ~
+    <div className="card-surface relative overflow-hidden bg-surface/50 backdrop-blur-xl border border-white/[0.06] shadow-2xl rounded-2xl">
+      {/* Xcode header bar */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.04] bg-surface-raised/40">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+        <span className="ml-3 text-[11px] text-muted-foreground font-mono font-medium">
+          vasanth.swift
         </span>
       </div>
 
-      {/* Terminal body */}
-      <div className="p-5 font-mono text-xs leading-relaxed space-y-1.5">
+      {/* Code body */}
+      <div className="p-6 font-mono text-xs leading-relaxed space-y-2 text-foreground/80">
         <div className="flex gap-2">
-          <span className="text-primary">❯</span>
-          <TypingLine text="whoami" delay={200} className="text-foreground" />
+          <span className="text-muted-foreground/60 select-none">❯</span>
+          <TypingLine text="whoami" delay={200} className="text-foreground font-medium" />
         </div>
         <TypingLine
           text="Vasanth Shetty — Full-Stack Developer"
           delay={700}
-          className="text-muted-foreground pl-4"
+          className="text-muted-foreground/90 pl-4 block"
         />
 
-        <div className="flex gap-2 pt-1">
-          <span className="text-primary">❯</span>
+        <div className="flex gap-2 pt-1.5">
+          <span className="text-muted-foreground/60 select-none">❯</span>
           <TypingLine
             text="cat status.json"
             delay={1100}
-            className="text-foreground"
+            className="text-foreground font-medium"
           />
         </div>
         <div className="pl-4 space-y-0.5">
           <TypingLine
             text={`{ "role": "BCA Student",`}
             delay={1500}
-            className="text-muted-foreground block"
+            className="text-muted-foreground/90 block"
           />
           <TypingLine
             text={`  "cgpa": "${personal.cgpa}",`}
             delay={1700}
-            className="text-muted-foreground block"
+            className="text-muted-foreground/90 block"
           />
           <TypingLine
             text={`  "graduating": "${personal.graduationYear}",`}
             delay={1900}
-            className="text-muted-foreground block"
+            className="text-muted-foreground/90 block"
           />
           <TypingLine
             text={`  "open_to": "internship & startup roles" }`}
             delay={2100}
-            className="text-primary block"
+            className="text-foreground block font-medium"
           />
         </div>
 
-        <div className="flex gap-2 pt-1">
-          <span className="text-primary">❯</span>
+        <div className="flex gap-2 pt-1.5">
+          <span className="text-muted-foreground/60 select-none">❯</span>
           <TypingLine
             text="ls projects/"
             delay={2500}
-            className="text-foreground"
+            className="text-foreground font-medium"
           />
         </div>
         <TypingLine
           text="MakerHQ  AgroShare  ScamGuard  CogniVault"
           delay={2900}
-          className="text-muted-foreground pl-4 block"
+          className="text-muted-foreground/90 pl-4 block"
         />
 
-        {/* blinking cursor */}
+        {/* cursor */}
         <div className="flex gap-2 pt-1">
-          <span className="text-primary">❯</span>
-          <span className="inline-block w-2 h-3.5 bg-primary animate-pulse mt-0.5" />
+          <span className="text-muted-foreground/60 select-none">❯</span>
+          <span className="inline-block w-1.5 h-3.5 bg-primary/80 animate-pulse mt-0.5" />
         </div>
       </div>
     </div>
   )
 }
 
-// ─── Stats strip ───────────────────────────────────────────────────────
+// ─── iOS widget style stats strip ──────────────────────────────────────
 function StatsStrip() {
   const stats = [
-    { value: "4", label: "Shipped Projects" },
-    { value: "3", label: "Hackathons Led" },
-    { value: personal.cgpa, label: "CGPA (Sem 5)" },
-    { value: "2026", label: "Graduating" },
+    { value: "4", label: "Shipped" },
+    { value: "3", label: "Led" },
+    { value: personal.cgpa, label: "CGPA" },
+    { value: "2026", label: "Grads" },
   ]
 
   return (
-    <div className="grid grid-cols-4 gap-px rounded-xl overflow-hidden border border-border/60">
+    <div className="grid grid-cols-4 gap-px rounded-2xl overflow-hidden border border-white/[0.06] bg-surface-raised/35 shadow-sm">
       {stats.map((s, i) => (
         <div
           key={i}
-          className="bg-surface flex flex-col items-center justify-center py-3 px-2 text-center"
+          className="bg-surface/30 backdrop-blur-xl flex flex-col items-center justify-center py-3.5 px-2 text-center"
         >
-          <span className="text-xl font-bold font-mono text-primary">
+          <span className="text-xl font-semibold tracking-tight text-foreground">
             {s.value}
           </span>
-          <span className="text-[10px] text-muted-foreground mt-0.5 leading-tight">
+          <span className="text-[10px] text-muted-foreground mt-0.5 font-medium leading-none">
             {s.label}
           </span>
         </div>
@@ -173,20 +172,10 @@ export function HeroSection() {
     <section
       id="hero"
       aria-label="Hero — Identity and introduction"
-      className="relative min-h-dvh flex items-center pt-20 pb-16"
+      className="relative min-h-dvh flex items-center pt-24 pb-16 overflow-hidden"
     >
-      {/* Ambient gradient blob — subtle, positioned top-right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.07]"
-        style={{
-          background:
-            "radial-gradient(circle, oklch(0.72 0.19 196) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="mx-auto max-w-6xl w-full px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="mx-auto max-w-6xl w-full px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ── Left: Identity ── */}
           <motion.div
             className="flex flex-col gap-6"
@@ -197,29 +186,31 @@ export function HeroSection() {
               visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
             }}
           >
-            {/* Availability badge */}
-            <AnimatedDiv variants={fadeUp} className="flex items-center gap-2.5">
-              <span className="pulse-dot" aria-hidden="true" />
-              <span className="label-mono text-[0.65rem]">
-                {personal.availability}
-              </span>
+            {/* Availability pill */}
+            <AnimatedDiv variants={fadeUp} className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-surface/40 backdrop-blur-md">
+                <span className="pulse-dot animate-pulse" aria-hidden="true" />
+                <span className="text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
+                  {personal.availability}
+                </span>
+              </div>
             </AnimatedDiv>
 
-            {/* Headshot + Name (mobile visible / desktop alongside text) */}
-            <AnimatedDiv variants={fadeUp} className="flex items-center gap-5">
-              <div className="relative w-16 h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden border-2 border-primary/30 shrink-0 brand-glow">
+            {/* Premium circular headshot + name */}
+            <AnimatedDiv variants={fadeUp} className="flex items-center gap-6">
+              <div className="relative w-20 h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border border-white/[0.08] shadow-lg shrink-0">
                 <Image
                   src="/headshot.png"
-                  alt="Vasanth Shetty headshot"
+                  alt="Vasanth Shetty profile picture"
                   fill
                   className="object-cover object-top"
                   priority
-                  sizes="80px"
+                  sizes="(max-width: 1024px) 80px, 96px"
                 />
               </div>
               <div className="space-y-1">
-                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05]">
-                  <span className="text-foreground">{personal.name}</span>
+                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-[1.05]">
+                  {personal.name}
                 </h1>
                 <p className="text-base lg:text-lg text-muted-foreground font-medium">
                   {personal.tagline}
@@ -229,19 +220,19 @@ export function HeroSection() {
 
             {/* Headline */}
             <AnimatedDiv variants={fadeUp}>
-              <p className="text-base text-muted-foreground leading-relaxed max-w-md">
+              <p className="text-base text-muted-foreground/90 leading-relaxed max-w-md">
                 {personal.headline}
               </p>
             </AnimatedDiv>
 
-            {/* Tech badges */}
-            <AnimatedDiv variants={fadeUp} className="flex flex-wrap gap-2">
+            {/* Sleek aluminum skill tags */}
+            <AnimatedDiv variants={fadeUp} className="flex flex-wrap gap-1.5">
               {["Next.js", "React", "TypeScript", "PHP", "Supabase", "MySQL"].map(
                 (tech) => (
                   <Badge
                     key={tech}
                     variant="secondary"
-                    className="text-xs font-mono px-2.5 py-0.5 bg-accent/40 text-accent-foreground border border-border/60"
+                    className="text-[11px] font-medium font-mono px-3 py-1 bg-surface-raised/40 text-foreground border border-white/[0.06] rounded-full shadow-sm"
                   >
                     {tech}
                   </Badge>
@@ -250,20 +241,20 @@ export function HeroSection() {
             </AnimatedDiv>
 
             <AnimatedDiv variants={fadeIn}>
-              <Separator className="opacity-30" />
+              <Separator className="opacity-20" />
             </AnimatedDiv>
 
-            {/* CTA buttons */}
+            {/* Luxury CTA buttons */}
             <AnimatedDiv variants={fadeUp} className="flex flex-wrap gap-3">
               <Button
                 id="hero-cta-projects"
                 asChild
                 size="default"
-                className="gap-2 font-medium"
+                className="gap-2 font-medium bg-foreground text-background hover:bg-foreground/90 rounded-full px-5 ios-hover"
               >
                 <Link href="#projects">
                   View Projects
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </Button>
               <Button
@@ -271,20 +262,20 @@ export function HeroSection() {
                 asChild
                 variant="outline"
                 size="default"
-                className="gap-2 font-medium border-border/80"
+                className="gap-2 font-medium border-white/[0.06] bg-surface/20 backdrop-blur-md text-foreground rounded-full px-5 ios-hover"
               >
                 <Link href="#contact">Get in Touch</Link>
               </Button>
             </AnimatedDiv>
 
             {/* Social links */}
-            <AnimatedDiv variants={fadeUp} className="flex items-center gap-4 pt-1">
+            <AnimatedDiv variants={fadeUp} className="flex items-center gap-4.5 pt-1.5">
               <Link
                 id="hero-github-link"
                 href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 aria-label="GitHub profile"
               >
                 <GithubIcon className="w-5 h-5" />
@@ -294,7 +285,7 @@ export function HeroSection() {
                 href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 aria-label="LinkedIn profile"
               >
                 <LinkedinIcon className="w-5 h-5" />
@@ -302,7 +293,7 @@ export function HeroSection() {
               <Link
                 id="hero-email-link"
                 href={`mailto:${personal.email}`}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors duration-200"
                 aria-label="Send email"
               >
                 <Mail className="w-5 h-5" />
@@ -312,7 +303,7 @@ export function HeroSection() {
 
           {/* ── Right: Terminal + Stats ── */}
           <motion.div
-            className="flex flex-col gap-5"
+            className="flex flex-col gap-6"
             initial={prefersReducedMotion ? "visible" : "hidden"}
             animate="visible"
             variants={{
@@ -320,28 +311,28 @@ export function HeroSection() {
               visible: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } },
             }}
           >
-            {/* Currently building card */}
+            {/* Soft, beautiful currently building card */}
             <AnimatedDiv
               variants={scaleIn}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl border border-primary/20 bg-primary/5"
+              className="flex items-center gap-3.5 px-4.5 py-3.5 rounded-2xl border border-white/[0.06] bg-surface/30 backdrop-blur-md shadow-sm"
             >
               <Sparkles className="w-4 h-4 text-primary shrink-0" />
               <div>
-                <span className="label-mono text-[0.6rem] block mb-0.5">
-                  Currently building
+                <span className="label-mono text-[9px] block mb-0.5 text-muted-foreground/80 font-semibold tracking-wider">
+                  CURRENTLY BUILDING
                 </span>
-                <span className="text-sm font-medium text-foreground/90">
+                <span className="text-[13px] font-semibold text-foreground/90">
                   {personal.currentFocus}
                 </span>
               </div>
             </AnimatedDiv>
 
-            {/* Terminal panel */}
+            {/* Apple style Xcode body panel */}
             <AnimatedDiv variants={slideInRight}>
               <TerminalPanel />
             </AnimatedDiv>
 
-            {/* Stats strip */}
+            {/* Stats grid widget */}
             <AnimatedDiv variants={fadeUp}>
               <StatsStrip />
             </AnimatedDiv>

@@ -16,7 +16,6 @@ import {
   AnimatedDiv,
   StaggerGroup,
   fadeUp,
-  scaleIn,
 } from "@/components/motion"
 
 const iconMap: Record<string, React.ElementType> = {
@@ -57,27 +56,26 @@ export function SkillsSection() {
     <AnimatedSection
       id="skills"
       aria-label="Technical skills"
-      className="py-24 px-6 bg-surface/40"
+      className="py-28 px-6 bg-surface/20"
     >
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
-        <div className="mb-12">
-          <span className="label-mono mb-3 block">Skills</span>
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
+        <div className="mb-12 space-y-3">
+          <span className="label-mono tracking-wider font-semibold text-primary">Skills</span>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
             A system, not a list.
           </h2>
-          <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-            Skills grouped by domain. Highlighted skills have been used in real
-            shipped projects.
+          <p className="text-muted-foreground text-[14px] leading-relaxed max-w-lg">
+            Skills organized by domain. Highlighted tags indicate hands-on implementation in shipped projects.
           </p>
         </div>
 
         <StaggerGroup>
           <AnimatedDiv variants={fadeUp}>
             <Tabs defaultValue={skillGroups[0].category} className="w-full">
-              {/* Tab list */}
+              {/* Tab list with Apple premium macOS Segmented Control styling */}
               <TabsList
-                className="flex flex-wrap h-auto gap-1 bg-surface border border-border/60 p-1 rounded-xl mb-8"
+                className="flex flex-wrap h-auto gap-1 bg-surface-raised/30 border border-white/[0.05] p-1 rounded-2xl mb-8 backdrop-blur-xl"
                 role="tablist"
               >
                 {skillGroups.map((group) => {
@@ -87,7 +85,7 @@ export function SkillsSection() {
                       key={group.category}
                       value={group.category}
                       id={`skills-tab-${group.category.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                      className="flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-300 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground cursor-pointer"
                     >
                       <Icon className="w-3.5 h-3.5" />
                       {group.category}
@@ -101,40 +99,39 @@ export function SkillsSection() {
                 <TabsContent
                   key={group.category}
                   value={group.category}
-                  className="mt-0"
+                  className="mt-0 focus-visible:outline-none"
                 >
-                  <div className="card-surface p-6">
+                  <div className="card-surface p-8 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl">
                     <div className="flex flex-wrap gap-2.5">
                       {group.skills.map((skill) => {
                         const isProven = provenSkills.has(skill)
                         return (
-                          <div key={skill} className="relative group">
-                            <Badge
-                              variant={isProven ? "default" : "secondary"}
-                              className={
-                                isProven
-                                  ? "px-3 py-1 text-sm font-mono cursor-default bg-primary/15 text-primary border border-primary/30 hover:bg-primary/20 transition-all duration-200 hover:scale-105"
-                                  : "px-3 py-1 text-sm font-mono cursor-default border border-border/50 hover:bg-accent/60 transition-all duration-200 hover:scale-105"
-                              }
-                            >
-                              {skill}
-                              {isProven && (
-                                <span className="ml-1.5 w-1.5 h-1.5 rounded-full bg-primary inline-block" />
-                              )}
-                            </Badge>
-                          </div>
+                          <Badge
+                            key={skill}
+                            variant={isProven ? "default" : "secondary"}
+                            className={
+                              isProven
+                                ? "px-4 py-1.5 text-xs font-mono font-medium rounded-full cursor-default bg-foreground text-background border-none hover:opacity-90 transition-all duration-300 scale-95 hover:scale-100 shadow-sm"
+                                : "px-4 py-1.5 text-xs font-mono font-medium rounded-full cursor-default bg-surface-raised/40 text-foreground border border-white/[0.05] hover:bg-surface-raised/80 transition-all duration-300 scale-95 hover:scale-100"
+                            }
+                          >
+                            {skill}
+                            {isProven && (
+                              <span className="ml-2 w-1.5 h-1.5 rounded-full bg-background inline-block animate-pulse" />
+                            )}
+                          </Badge>
                         )
                       })}
                     </div>
 
-                    {/* Legend */}
-                    <div className="mt-6 pt-4 border-t border-border/40 flex items-center gap-4 text-[11px] text-muted-foreground font-mono">
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
+                    {/* Highly premium Apple-style Legend */}
+                    <div className="mt-8 pt-5 border-t border-white/[0.04] flex flex-wrap items-center gap-6 text-[11px] text-muted-foreground font-medium font-mono">
+                      <span className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-foreground inline-block" />
                         Used in shipped projects
                       </span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50 inline-block" />
+                      <span className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-surface-raised/80 border border-white/[0.06] inline-block" />
                         Studied / practiced
                       </span>
                     </div>

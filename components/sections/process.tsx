@@ -30,51 +30,52 @@ export function ProcessSection() {
     <AnimatedSection
       id="process"
       aria-label="How I work — build process"
-      className="py-24 px-6"
+      className="py-28 px-6"
     >
       <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-12">
-          <span className="label-mono mb-3 block">Process</span>
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
+        <div className="mb-14 space-y-3">
+          <span className="label-mono tracking-wider font-semibold text-primary">Process</span>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
             How I actually build things.
           </h2>
-          <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-            Six stages I repeat on every project. This is what separates building
-            with intent from building at random.
+          <p className="text-muted-foreground text-[14px] leading-relaxed max-w-lg">
+            Six distinct engineering disciplines I run sequentially on every architecture.
           </p>
         </div>
 
-        {/* Process stepper grid */}
-        <StaggerGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Process layout grid */}
+        <StaggerGroup className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {buildProcess.map((step) => {
             const Icon = iconMap[step.icon]
             return (
               <AnimatedDiv key={step.step} variants={fadeUp}>
-                <div className="card-surface-raised p-5 h-full group hover:border-primary/30 transition-all duration-200 relative overflow-hidden">
-                  {/* Step number — large background */}
+                <div className="card-surface-raised ios-hover p-7 h-full border border-white/[0.04] bg-surface-raised/40 hover:border-white/[0.1] rounded-3xl relative overflow-hidden group">
+                  {/* Step number — large luxury background typography */}
                   <span
-                    className="absolute -bottom-3 -right-1 text-7xl font-bold text-foreground/[0.03] font-mono select-none pointer-events-none"
+                    className="absolute -bottom-5 -right-2 text-8xl font-black text-foreground/[0.02] font-mono select-none pointer-events-none group-hover:text-primary/[0.04] transition-colors duration-500"
                     aria-hidden="true"
                   >
                     {step.step}
                   </span>
 
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary group-hover:bg-primary/15 transition-colors">
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex items-center justify-center w-9 h-9 rounded-2xl bg-foreground/[0.04] text-foreground shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                         <Icon className="w-4 h-4" />
                       </span>
-                      <span className="label-mono text-primary">
-                        {step.step}
+                      <span className="label-mono text-primary font-semibold text-[10px] tracking-wide">
+                        STEP {step.step}
                       </span>
                     </div>
-                    <h3 className="text-sm font-semibold text-foreground mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
+                    <div className="space-y-1.5">
+                      <h3 className="text-[14px] font-bold text-foreground tracking-tight">
+                        {step.title}
+                      </h3>
+                      <p className="text-[12px] text-muted-foreground leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </AnimatedDiv>

@@ -23,7 +23,7 @@ function CopyEmail() {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
-      // fallback: do nothing
+      // fallback
     }
   }
 
@@ -31,18 +31,23 @@ function CopyEmail() {
     <button
       id="contact-copy-email"
       onClick={copy}
-      className="group flex items-center gap-2.5 px-4 py-3 rounded-xl border border-border/60 bg-surface hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 w-full text-left"
+      className="group flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 transition-all duration-300 w-full text-left cursor-pointer shadow-sm"
       aria-label="Copy email address"
     >
-      <Mail className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
-      <span className="text-sm text-foreground font-mono">
+      <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-foreground/[0.04] text-foreground shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+        <Mail className="w-4 h-4 shrink-0" />
+      </div>
+      <span className="text-sm font-semibold text-foreground/90 font-mono tracking-tight">
         {personal.email}
       </span>
       <span className="ml-auto">
         {copied ? (
-          <Check className="w-3.5 h-3.5 text-emerald-400" />
+          <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-500 font-mono">
+            <Check className="w-3.5 h-3.5" />
+            COPIED
+          </span>
         ) : (
-          <Copy className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+          <Copy className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground transition-colors duration-200" />
         )}
       </span>
     </button>
@@ -54,40 +59,37 @@ export function ContactSection() {
     <AnimatedSection
       id="contact"
       aria-label="Contact and links"
-      className="py-24 px-6 bg-surface/40"
+      className="py-28 px-6 bg-surface/20"
     >
       <div className="mx-auto max-w-6xl">
-        <StaggerGroup className="max-w-2xl mx-auto text-center">
+        <StaggerGroup className="max-w-2xl mx-auto text-center space-y-8">
           {/* Header */}
-          <AnimatedDiv variants={fadeUp}>
-            <span className="label-mono mb-4 block">Contact</span>
-            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-4">
+          <AnimatedDiv variants={fadeUp} className="space-y-3">
+            <span className="label-mono tracking-wider font-semibold text-primary">Contact</span>
+            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
               Let&apos;s work on something real.
             </h2>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-10">
-              I&apos;m looking for internship roles and early-stage startup
-              opportunities. If you&apos;re building something and need someone
-              who can write backend logic, design systems, and ship fast — reach
-              out.
+            <p className="text-muted-foreground text-[14px] leading-relaxed">
+              I&apos;m looking for internship roles and early-stage startup opportunities. If you&apos;re building a product and need a fast, detail-oriented full-stack engineer — let&apos;s build together.
             </p>
           </AnimatedDiv>
 
-          {/* Contact options */}
-          <AnimatedDiv variants={scaleIn} className="flex flex-col gap-3 mb-8">
+          {/* Contact options block */}
+          <AnimatedDiv variants={scaleIn} className="flex flex-col gap-4 max-w-md mx-auto">
             <CopyEmail />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4">
               <Button
                 id="contact-github-btn"
                 asChild
                 variant="outline"
-                className="gap-2 border-border/60 hover:border-primary/40 hover:bg-primary/5"
+                className="gap-2 border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 rounded-2xl h-11 font-semibold ios-hover cursor-pointer"
               >
                 <Link
                   href={personal.github}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <GithubIcon className="w-4 h-4" />
+                  <GithubIcon className="w-4 h-4 text-foreground/80" />
                   GitHub
                 </Link>
               </Button>
@@ -95,29 +97,31 @@ export function ContactSection() {
                 id="contact-linkedin-btn"
                 asChild
                 variant="outline"
-                className="gap-2 border-border/60 hover:border-primary/40 hover:bg-primary/5"
+                className="gap-2 border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 rounded-2xl h-11 font-semibold ios-hover cursor-pointer"
               >
                 <Link
                   href={personal.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <LinkedinIcon className="w-4 h-4" />
+                  <LinkedinIcon className="w-4 h-4 text-foreground/80" />
                   LinkedIn
                 </Link>
               </Button>
             </div>
           </AnimatedDiv>
 
-          {/* Status */}
+          {/* Status availability badge */}
           <AnimatedDiv
             variants={fadeUp}
-            className="flex items-center justify-center gap-2"
+            className="flex items-center justify-center gap-2 pt-4"
           >
-            <span className="pulse-dot" aria-hidden="true" />
-            <span className="label-mono text-[0.65rem]">
-              {personal.availability}
-            </span>
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-surface/40 backdrop-blur-md shadow-sm">
+              <span className="pulse-dot animate-pulse" aria-hidden="true" />
+              <span className="text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
+                {personal.availability}
+              </span>
+            </div>
           </AnimatedDiv>
         </StaggerGroup>
       </div>

@@ -16,72 +16,71 @@ export function HackathonsSection() {
     <AnimatedSection
       id="hackathons"
       aria-label="Hackathon experience"
-      className="py-24 px-6 bg-surface/40"
+      className="py-28 px-6 bg-surface/20"
     >
       <div className="mx-auto max-w-6xl">
         {/* Header */}
-        <div className="mb-12">
-          <span className="label-mono mb-3 block">Hackathons</span>
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground mb-3">
+        <div className="mb-14 space-y-3">
+          <span className="label-mono tracking-wider font-semibold text-primary">Hackathons</span>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
             Not trophies.{" "}
-            <span className="text-brand-gradient">Proof of speed.</span>
+            <span className="opacity-60 block text-foreground font-semibold">Proof of speed.</span>
           </h2>
-          <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
-            3 hackathons. All as team lead. Different constraints — same pattern:
-            understand fast, decide fast, build fast.
+          <p className="text-muted-foreground text-[14px] leading-relaxed max-w-lg">
+            3 hackathons. Led team-building, architecture formulation, scope-cutting, and system coding.
           </p>
         </div>
 
-        {/* Timeline */}
+        {/* Timeline block */}
         <div className="relative">
-          {/* Vertical line */}
+          {/* Subtle vertical silver-gray divider line */}
           <div
-            className="absolute left-5 top-0 bottom-0 w-px bg-border/60 hidden sm:block"
+            className="absolute left-5 top-0 bottom-0 w-px bg-white/[0.06] hidden sm:block"
             aria-hidden="true"
           />
 
           <StaggerGroup slow className="flex flex-col gap-6">
             {hackathons.map((h, i) => (
               <AnimatedDiv key={i} variants={slideInLeft} className="sm:pl-14 relative">
-                {/* Timeline node */}
+                {/* Timeline silver pill dot */}
                 <div
-                  className="absolute left-3.5 top-5 w-3 h-3 rounded-full border-2 border-primary bg-background hidden sm:block"
+                  className="absolute left-3.5 top-6 w-3 h-3 rounded-full border-2 border-foreground bg-background hidden sm:block shadow-sm"
                   aria-hidden="true"
                 />
 
-                <div className="card-surface p-5 hover:border-primary/30 transition-all duration-200 group">
+                <div className="card-surface ios-hover p-6 bg-surface/30 border border-white/[0.05] rounded-3xl group">
                   <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
-                    {/* Year */}
+                    {/* Event Year label */}
                     <div className="shrink-0">
-                      <span className="label-mono text-primary">{h.year}</span>
+                      <span className="label-mono text-primary font-semibold text-xs tracking-wider">{h.year}</span>
                     </div>
 
-                    <div className="flex-1 space-y-3">
-                      {/* Name + role */}
-                      <div>
-                        <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                    <div className="flex-1 space-y-4">
+                      {/* Name + outcome description */}
+                      <div className="space-y-1">
+                        <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                           {h.name}
                         </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="text-[13px] font-medium text-muted-foreground leading-relaxed">
                           {h.outcome}
                         </p>
                       </div>
 
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 items-center">
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Users className="w-3 h-3 text-primary" />
-                          {h.role}
-                        </span>
-                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                          <Timer className="w-3 h-3 text-primary" />
-                          {h.duration}
-                        </span>
+                      {/* Timeline metadata badges */}
+                      <div className="flex flex-wrap gap-2.5 items-center">
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                          <Users className="w-3.5 h-3.5 text-muted-foreground/60" />
+                          <span>{h.role}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                          <Timer className="w-3.5 h-3.5 text-muted-foreground/60" />
+                          <span>{h.duration}</span>
+                        </div>
                         {h.tags.map((tag) => (
                           <Badge
                             key={tag}
                             variant="secondary"
-                            className="text-[10px] font-mono px-2 py-0 border border-border/50"
+                            className="text-[10px] font-mono px-2.5 py-0.5 bg-surface-raised/35 text-muted-foreground border border-white/[0.04] rounded-full"
                           >
                             {tag}
                           </Badge>
