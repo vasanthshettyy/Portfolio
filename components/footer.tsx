@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { personal } from "@/lib/data"
 
 export function Footer() {
@@ -8,9 +9,13 @@ export function Footer() {
         <span className="font-mono">
           © {year} {personal.name}
         </span>
-        <span className="font-mono">
-          Built with Next.js · Deployed on Vercel
-        </span>
+        <div className="flex items-center gap-3 font-mono">
+          <Link href="/build-log" className="hover:text-foreground transition-colors cursor-pointer">
+            Build Log
+          </Link>
+          <span>·</span>
+          <span>Built with Next.js & Vercel</span>
+        </div>
       </div>
     </footer>
   )

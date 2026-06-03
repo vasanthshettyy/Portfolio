@@ -44,6 +44,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vasanth Shetty",
+    "jobTitle": "Full-Stack Developer",
+    "url": "https://vasanthshetty.dev",
+    "sameAs": [
+      "https://github.com/vasanthshettyy",
+      "https://linkedin.com/in/vasanthshettyy"
+    ],
+    "knowsAbout": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "PHP",
+      "MySQL",
+      "Supabase",
+      "System Architecture",
+      "AI-Assisted Development"
+    ],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Bachelor of Computer Applications (BCA)"
+    }
+  }
+
   return (
     <html
       lang="en"
@@ -51,6 +78,10 @@ export default function RootLayout({
       className={cn(inter.variable, jetbrainsMono.variable)}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
       </body>
     </html>
