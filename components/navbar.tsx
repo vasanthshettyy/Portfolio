@@ -64,7 +64,7 @@ export function Navbar() {
               sizes="28px"
             />
           </div>
-          <span className="text-sm font-semibold text-foreground/90 hidden sm:inline group-hover:text-foreground transition-colors">
+          <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground transition-colors">
             {personal.name}
           </span>
         </Link>
