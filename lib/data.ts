@@ -172,34 +172,26 @@ export const projects = [
 // ─── Hackathons ────────────────────────────────────────────────────────
 export const hackathons = [
   {
-    name: "Smart India Hackathon (Internal)",
+    name: "AGR CET AI/ML Hackathon",
+    location: "AGR CET College, Varur, Hubli",
     role: "Team Lead",
-    duration: "12 hours",
-    year: "2024",
+    duration: "24 hours",
+    year: "2026",
+    project: "CogniVault",
+    outcome:
+      "Led team to design and build a dual-engine AI forensics and reasoning pipeline in a 24-hour sprint.",
+    tags: ["Team Lead", "AI/ML", "24h Sprint"],
+  },
+  {
+    name: "SDMCET Hackathon",
+    location: "SDMCET College",
+    role: "Builder & Developer",
+    duration: "8 hours",
+    year: "2025",
     project: "Scam Guard",
     outcome:
-      "Shipped a working browser scam-detection tool under full time pressure",
-    tags: ["Team Lead", "AI", "12h Sprint"],
-  },
-  {
-    name: "College Techfest Hackathon",
-    role: "Team Lead",
-    duration: "6 hours",
-    year: "2024",
-    project: "Rapid MVP",
-    outcome:
-      "Led team from zero to functional prototype in 6 hours under audience evaluation",
-    tags: ["Team Lead", "6h Sprint", "MVP"],
-  },
-  {
-    name: "Internal Innovation Challenge",
-    role: "Team Lead",
-    duration: "12 hours",
-    year: "2023",
-    project: "Web Tool",
-    outcome:
-      "Coordinated end-to-end — problem framing, architecture, build, and presentation",
-    tags: ["Team Lead", "Full Ownership", "12h Sprint"],
+      "Built and shipped the Scam Guard browser-based risk detection tool under a strict 8-hour sprint.",
+    tags: ["Developer", "Browser APIs", "8h Sprint"],
   },
 ];
 

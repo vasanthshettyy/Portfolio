@@ -27,7 +27,7 @@ export function HackathonsSection() {
             <span className="opacity-60 block text-foreground font-semibold">Proof of speed.</span>
           </h2>
           <p className="text-muted-foreground text-[14px] leading-relaxed max-w-lg">
-            3 hackathons. Led team-building, architecture formulation, scope-cutting, and system coding.
+            Rapid execution under pressure. Focused on AI/ML sprints, browser extension builds, and team leadership.
           </p>
         </div>
 
@@ -58,8 +58,13 @@ export function HackathonsSection() {
                     <div className="flex-1 space-y-4">
                       {/* Name + outcome description */}
                       <div className="space-y-1">
-                        <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                          {h.name}
+                        <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-300 flex flex-wrap items-center gap-x-2 gap-y-1">
+                          <span>{h.name}</span>
+                          {"location" in h && (
+                            <span className="text-xs font-normal text-muted-foreground/60 font-mono">
+                              ({h.location})
+                            </span>
+                          )}
                         </h3>
                         <p className="text-[13px] font-medium text-muted-foreground leading-relaxed">
                           {h.outcome}
