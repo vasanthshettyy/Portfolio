@@ -26,9 +26,9 @@ const buildLogs: LogEntry[] = [
   },
   {
     date: "May 2026",
-    title: "Led CogniVault AGR CET AI/ML Hackathon",
+    title: "Led CogniVault AGMR CET AI/ML Hackathon",
     category: "Hackathon",
-    description: "Led a team at AGR CET College (Varur, Hubli) to design, build, and deploy CogniVault — a dual-engine AI forensics and reasoning pipeline — within a high-pressure 24-hour sprint.",
+    description: "Led a team at AGMR CET College (Varur, Hubli) to design, build, and deploy CogniVault — a dual-engine AI forensics and reasoning pipeline — within a high-pressure 24-hour sprint.",
     tech: ["React", "Node.js", "Supabase", "OpenRouter", "Groq"],
     metrics: "Completed in 24 hours",
   },

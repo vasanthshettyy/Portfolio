@@ -172,8 +172,8 @@ export const projects = [
 // ─── Hackathons ────────────────────────────────────────────────────────
 export const hackathons = [
   {
-    name: "AGR CET AI/ML Hackathon",
-    location: "AGR CET College, Varur, Hubli",
+    name: "AGMR CET AI/ML Hackathon",
+    location: "AGMR CET College, Varur, Hubli",
     role: "Team Lead",
     duration: "24 hours",
     year: "2026",

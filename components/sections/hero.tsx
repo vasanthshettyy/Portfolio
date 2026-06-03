@@ -25,112 +25,141 @@ import {
   useReducedMotion,
 } from "@/components/motion"
 
-// ─── Animated typing effect for the terminal ───────────────────────────
-function TypingLine({
-  text,
-  delay = 0,
-  className,
-}: {
+interface TerminalLine {
   text: string
-  delay?: number
-  className?: string
-}) {
-  const [visible, setVisible] = React.useState(false)
-
-  React.useEffect(() => {
-    const t = setTimeout(() => setVisible(true), delay)
-    return () => clearTimeout(t)
-  }, [delay])
-
-  return (
-    <span
-      className={cn(
-        "transition-opacity duration-600",
-        visible ? "opacity-100" : "opacity-0",
-        className
-      )}
-    >
-      {text}
-    </span>
-  )
+  type: "cmd" | "output" | "error"
 }
 
-// ─── Xcode / Terminal mini panel ───────────────────────────────────────
+// ─── Interactive Xcode / Terminal Panel ───────────────────────────────
 function TerminalPanel() {
+  const [history, setHistory] = React.useState<TerminalLine[]>([
+    { text: "whoami", type: "cmd" },
+    { text: "Vasanth Shetty — Full-Stack Developer", type: "output" },
+    { text: "cat status.json", type: "cmd" },
+    { text: `{ "role": "BCA Student", "cgpa": "${personal.cgpa}", "graduating": "${personal.graduationYear}" }`, type: "output" },
+    { text: "help", type: "cmd" },
+    { text: "Available commands: about, projects, skills, hackathons, email, clear", type: "output" },
+  ])
+  const [inputValue, setInputValue] = React.useState("")
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  const handleCommand = (e: React.FormEvent) => {
+    e.preventDefault()
+    const cmd = inputValue.trim().toLowerCase()
+    if (!cmd) return
+
+    let newHistory = [...history, { text: cmd, type: "cmd" as const }]
+
+    if (cmd === "clear") {
+      newHistory = []
+    } else if (cmd === "help") {
+      newHistory.push({
+        text: "Available commands: about, projects, skills, hackathons, email, clear",
+        type: "output",
+      })
+    } else if (cmd === "about") {
+      newHistory.push({
+        text: "BCA student building AI-assisted full-stack products for startup environments. Focused on rapid MVPs and system architecture.",
+        type: "output",
+      })
+    } else if (cmd === "projects") {
+      newHistory.push({
+        text: "• MakerHQ: SaaS automation engine\n• AgroShare: Farm tools leasing marketplace\n• Scam Guard: AI chrome extension detector\n• CogniVault: Multi-agent reasoner",
+        type: "output",
+      })
+    } else if (cmd === "skills") {
+      newHistory.push({
+        text: "Core: Next.js, React, TypeScript, PHP, MySQL, Supabase, Git, Vercel",
+        type: "output",
+      })
+    } else if (cmd === "hackathons") {
+      newHistory.push({
+        text: "• AGMR CET AI/ML Hackathon (2026) - Team Lead (CogniVault)\n• SDMCET Hackathon (2025) - Scam Guard build",
+        type: "output",
+      })
+    } else if (cmd === "email") {
+      newHistory.push({
+        text: `${personal.email} (Copied to clipboard)`,
+        type: "output",
+      })
+      navigator.clipboard.writeText(personal.email).catch(() => {})
+    } else {
+      newHistory.push({
+        text: `Command not found: '${cmd}'. Type 'help' for options.`,
+        type: "error",
+      })
+    }
+
+    setHistory(newHistory)
+    setInputValue("")
+    setTimeout(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollTop = containerRef.current.scrollHeight
+      }
+    }, 50)
+  }
+
+  const focusInput = () => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }
+
   return (
-    <div className="card-surface relative overflow-hidden bg-surface/50 backdrop-blur-xl border border-white/[0.06] shadow-2xl rounded-2xl">
+    <div
+      onClick={focusInput}
+      className="card-surface relative overflow-hidden bg-surface/50 backdrop-blur-xl border border-white/[0.06] shadow-2xl rounded-2xl cursor-text"
+    >
       {/* Xcode header bar */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.04] bg-surface-raised/40">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.04] bg-surface-raised/40 select-none">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
         <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-        <span className="ml-3 text-[11px] text-muted-foreground font-mono font-medium">
-          vasanth.swift
+        <span className="ml-3 text-[11px] text-muted-foreground font-mono font-medium flex items-center gap-1.5">
+          <span>vasanth.swift</span>
+          <span className="px-1.5 py-0.5 rounded bg-foreground/[0.06] text-[8px] text-muted-foreground/80 font-bold uppercase tracking-wider">
+            interactive
+          </span>
         </span>
       </div>
 
       {/* Code body */}
-      <div className="p-6 font-mono text-xs leading-relaxed space-y-2 text-foreground/80">
-        <div className="flex gap-2">
-          <span className="text-muted-foreground/60 select-none">❯</span>
-          <TypingLine text="whoami" delay={200} className="text-foreground font-medium" />
-        </div>
-        <TypingLine
-          text="Vasanth Shetty — Full-Stack Developer"
-          delay={700}
-          className="text-muted-foreground/90 pl-4 block"
-        />
+      <div
+        ref={containerRef}
+        className="p-6 font-mono text-xs leading-relaxed h-[290px] overflow-y-auto space-y-2 text-foreground/80 scrollbar-none"
+      >
+        {history.map((line, index) => (
+          <div key={index} className="space-y-0.5">
+            {line.type === "cmd" ? (
+              <div className="flex gap-2">
+                <span className="text-primary font-bold select-none">❯</span>
+                <span className="text-foreground font-medium">{line.text}</span>
+              </div>
+            ) : (
+              <div className="pl-4 whitespace-pre-line text-muted-foreground/90">
+                {line.text}
+              </div>
+            )}
+          </div>
+        ))}
 
-        <div className="flex gap-2 pt-1.5">
-          <span className="text-muted-foreground/60 select-none">❯</span>
-          <TypingLine
-            text="cat status.json"
-            delay={1100}
-            className="text-foreground font-medium"
+        {/* Input prompt line */}
+        <form onSubmit={handleCommand} className="flex gap-2 items-center pt-1">
+          <span className="text-primary font-bold select-none">❯</span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 m-0 text-foreground font-medium resize-none placeholder-muted-foreground/30 focus-visible:ring-0 focus-visible:outline-none"
+            placeholder="type 'help'..."
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck={false}
           />
-        </div>
-        <div className="pl-4 space-y-0.5">
-          <TypingLine
-            text={`{ "role": "BCA Student",`}
-            delay={1500}
-            className="text-muted-foreground/90 block"
-          />
-          <TypingLine
-            text={`  "cgpa": "${personal.cgpa}",`}
-            delay={1700}
-            className="text-muted-foreground/90 block"
-          />
-          <TypingLine
-            text={`  "graduating": "${personal.graduationYear}",`}
-            delay={1900}
-            className="text-muted-foreground/90 block"
-          />
-          <TypingLine
-            text={`  "open_to": "internship & startup roles" }`}
-            delay={2100}
-            className="text-foreground block font-medium"
-          />
-        </div>
-
-        <div className="flex gap-2 pt-1.5">
-          <span className="text-muted-foreground/60 select-none">❯</span>
-          <TypingLine
-            text="ls projects/"
-            delay={2500}
-            className="text-foreground font-medium"
-          />
-        </div>
-        <TypingLine
-          text="MakerHQ  AgroShare  ScamGuard  CogniVault"
-          delay={2900}
-          className="text-muted-foreground/90 pl-4 block"
-        />
-
-        {/* cursor */}
-        <div className="flex gap-2 pt-1">
-          <span className="text-muted-foreground/60 select-none">❯</span>
-          <span className="inline-block w-1.5 h-3.5 bg-primary/80 animate-pulse mt-0.5" />
-        </div>
+        </form>
       </div>
     </div>
   )

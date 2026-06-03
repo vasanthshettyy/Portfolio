@@ -17,6 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vasanthshetty.dev"),
   title: "Vasanth Shetty — Full-Stack Developer & Builder",
   description:
     "BCA student building AI-assisted full-stack products for startup environments. Projects include MakerHQ, AgroShare, Scam Guard, and CogniVault.",
@@ -31,11 +32,32 @@ export const metadata: Metadata = {
     "AI-assisted development",
   ],
   authors: [{ name: "Vasanth Shetty" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Vasanth Shetty — Full-Stack Developer & Builder",
     description:
       "Portfolio of a startup-minded full-stack developer. Real projects, real code, shipped products.",
+    url: "https://vasanthshetty.dev",
+    siteName: "Vasanth Shetty Portfolio",
+    images: [
+      {
+        url: "/headshot.png",
+        width: 800,
+        height: 800,
+        alt: "Vasanth Shetty",
+      },
+    ],
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vasanth Shetty — Full-Stack Developer & Builder",
+    description:
+      "BCA student building AI-assisted full-stack products for startup environments.",
+    images: ["/headshot.png"],
   },
 }
 

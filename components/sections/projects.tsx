@@ -14,6 +14,7 @@ import {
   StaggerGroup,
   fadeUp,
   motion,
+  useReducedMotion,
 } from "@/components/motion"
 
 function ProjectCard({
@@ -22,14 +23,67 @@ function ProjectCard({
   project: (typeof projects)[0]
 }) {
   const [expanded, setExpanded] = React.useState(false)
+  const prefersReducedMotion = useReducedMotion()
+
+  const [rotateX, setRotateX] = React.useState(0)
+  const [rotateY, setRotateY] = React.useState(0)
+  const [glowX, setGlowX] = React.useState(50)
+  const [glowY, setGlowY] = React.useState(50)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return
+    const card = e.currentTarget
+    const box = card.getBoundingClientRect()
+    const x = e.clientX - box.left
+    const y = e.clientY - box.top
+    
+    const px = (x / box.width) * 100
+    const py = (y / box.height) * 100
+    setGlowX(px)
+    setGlowY(py)
+
+    const centerX = box.width / 2
+    const centerY = box.height / 2
+    // Limit rotation to max 5 degrees
+    const rX = ((y - centerY) / centerY) * -5
+    const rY = ((x - centerX) / centerX) * 5
+    setRotateX(rX)
+    setRotateY(rY)
+  }
+
+  const handleMouseLeave = () => {
+    setRotateX(0)
+    setRotateY(0)
+  }
 
   return (
     <AnimatedDiv variants={fadeUp}>
-      <article
-        className="card-surface ios-hover bg-surface/30 backdrop-blur-xl border border-white/[0.05] flex flex-col gap-0 overflow-hidden rounded-3xl shadow-md h-full"
+      <motion.article
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        animate={{
+          rotateX,
+          rotateY,
+          transformPerspective: 1000,
+        }}
+        transition={{ type: "spring", stiffness: 250, damping: 22 }}
+        className="card-surface group relative overflow-hidden bg-surface/30 backdrop-blur-xl border border-white/[0.05] flex flex-col gap-0 rounded-3xl shadow-md h-full transition-colors duration-300 hover:border-white/[0.12] select-none"
+        style={{
+          transformStyle: "preserve-3d",
+        }}
       >
+        {/* Cursor tracking glass light reflection glow */}
+        {!prefersReducedMotion && (
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+            style={{
+              background: `radial-gradient(350px circle at ${glowX}% ${glowY}%, rgba(255, 255, 255, 0.05), transparent 80%)`,
+            }}
+          />
+        )}
+
         {/* Header content */}
-        <div className="p-7 pb-5 flex flex-col gap-4">
+        <div className="p-7 pb-5 flex flex-col gap-4 relative z-20">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-3 flex-wrap">
               <Badge
@@ -101,32 +155,13 @@ function ProjectCard({
           </div>
         </div>
 
-        <Separator className="opacity-10" />
-
-        {/* Highlights */}
-        <div className="px-7 py-5">
-          <ul className="space-y-2.5">
-            {project.highlights.map((h) => (
-              <li
-                key={h}
-                className="flex items-start gap-2.5 text-[13px] text-muted-foreground leading-relaxed"
-              >
-                <ArrowRight className="w-3.5 h-3.5 mt-0.5 text-foreground/40 shrink-0" />
-                {h}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Expanded Technical Info */}
-        <div className="border-t border-white/[0.04] mt-auto bg-surface-raised/10">
+        <div className="mt-auto relative z-20">
+          <Separator className="opacity-10" />
           <button
-            id={`project-expand-${project.slug}`}
-            onClick={() => setExpanded((e) => !e)}
-            className="w-full flex items-center justify-between px-7 py-4.5 text-xs font-semibold tracking-wide text-muted-foreground hover:text-foreground hover:bg-surface-raised/20 transition-all duration-300"
-            aria-expanded={expanded}
+            onClick={() => setExpanded(!expanded)}
+            className="w-full flex items-center justify-between px-7 py-4 text-xs font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 cursor-pointer"
           >
-            <span className="font-mono uppercase text-[10px]">Technical deep-dive</span>
+            <span>TECHNICAL SPECS</span>
             <motion.span
               animate={{ rotate: expanded ? 180 : 0 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -169,7 +204,7 @@ function ProjectCard({
             </div>
           </motion.div>
         </div>
-      </article>
+      </motion.article>
     </AnimatedDiv>
   )
 }
