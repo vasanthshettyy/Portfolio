@@ -145,20 +145,25 @@ function TerminalPanel() {
         ))}
 
         {/* Input prompt line */}
-        <form onSubmit={handleCommand} className="flex gap-2 items-center pt-1">
+        <form onSubmit={handleCommand} className="flex gap-2 items-center pt-1 relative">
           <span className="text-primary font-bold select-none">❯</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 m-0 text-foreground font-medium resize-none placeholder-muted-foreground/30 focus-visible:ring-0 focus-visible:outline-none"
-            placeholder="type 'help'..."
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck={false}
-          />
+          <div className="flex-1 flex items-center relative min-h-[1.25rem]">
+            <span className="whitespace-pre text-foreground font-medium select-none">
+              {inputValue || <span className="text-muted-foreground/30">type 'help'...</span>}
+            </span>
+            <span className="inline-block w-2.5 h-4 bg-primary/80 animate-pulse ml-0.5" />
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-text outline-none border-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none p-0 m-0 bg-transparent text-transparent caret-transparent"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck={false}
+            />
+          </div>
         </form>
       </div>
     </div>
