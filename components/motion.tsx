@@ -58,6 +58,22 @@ export const staggerContainerSlow: Variants = {
   },
 }
 
+// ─── Hydration-safe Mount Hook ───────────────────────────────────────────
+export function useMounted() {
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+  return mounted
+}
+
+// ─── Hydration-safe Reduced Motion Hook ──────────────────────────────────
+export function useHydratedReducedMotion() {
+  const mounted = useMounted()
+  const prefersReducedMotion = useReducedMotion()
+  return mounted ? !!prefersReducedMotion : false
+}
+
 // ─── Section wrapper with viewport-triggered animation ─────────────────
 export function AnimatedSection({
   children,
@@ -72,14 +88,15 @@ export function AnimatedSection({
   "aria-label"?: string
   delay?: number
 }) {
-  const prefersReducedMotion = useReducedMotion()
+  const mounted = useMounted()
+  const prefersReducedMotion = useHydratedReducedMotion()
 
   return (
     <motion.section
       id={id}
       aria-label={ariaLabel}
       className={className}
-      initial={prefersReducedMotion ? "visible" : "hidden"}
+      initial={mounted && !prefersReducedMotion ? "hidden" : "visible"}
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={fadeUp}
@@ -118,12 +135,13 @@ export function StaggerGroup({
   className?: string
   slow?: boolean
 }) {
-  const prefersReducedMotion = useReducedMotion()
+  const mounted = useMounted()
+  const prefersReducedMotion = useHydratedReducedMotion()
 
   return (
     <motion.div
       className={className}
-      initial={prefersReducedMotion ? "visible" : "hidden"}
+      initial={mounted && !prefersReducedMotion ? "hidden" : "visible"}
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
       variants={slow ? staggerContainerSlow : staggerContainer}
@@ -134,4 +152,5 @@ export function StaggerGroup({
 }
 
 // Re-export motion for direct use
-export { motion, useReducedMotion }
+export { motion }
+export { useHydratedReducedMotion as useReducedMotion }
