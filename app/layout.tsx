@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import Script from "next/script"
+import { MotionConfig } from "framer-motion"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -99,12 +101,19 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(inter.variable, jetbrainsMono.variable)}
     >
-      <body>
-        <script
+      <head>
+        <Script
+          id="json-ld"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
+      </head>
+      <body>
+        <ThemeProvider defaultTheme="dark">
+          <MotionConfig reducedMotion="never">
+            {children}
+          </MotionConfig>
+        </ThemeProvider>
       </body>
     </html>
   )
