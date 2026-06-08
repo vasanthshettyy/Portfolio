@@ -10,6 +10,7 @@ import {
 } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
+import { ResumeModal } from "@/components/resume-modal"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { personal } from "@/lib/data"
@@ -291,6 +292,16 @@ export function HeroSection() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </Button>
+              <ResumeModal>
+                <Button
+                  id="hero-cta-resume"
+                  variant="outline"
+                  size="default"
+                  className="gap-2 font-medium border-white/[0.06] bg-surface/20 backdrop-blur-md text-foreground rounded-full px-5 ios-hover cursor-pointer"
+                >
+                  Resume
+                </Button>
+              </ResumeModal>
               <Button
                 id="hero-cta-contact"
                 asChild

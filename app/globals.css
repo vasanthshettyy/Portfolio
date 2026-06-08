@@ -279,4 +279,13 @@
     70% { box-shadow: 0 0 0 6px oklch(0.62 0.16 250 / 0%); }
     100% { box-shadow: 0 0 0 0 oklch(0.62 0.16 250 / 0%); }
   }
+
+  /* Hide scrollbars */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 }

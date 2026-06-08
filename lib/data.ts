@@ -11,7 +11,7 @@ export const personal = {
   cgpa: "8.46",
   graduationYear: "2026",
   degree: "BCA",
-  email: "vasanthshetty@email.com",
+  email: "vasanthvhsetty55@gmail.com",
   github: "https://github.com/vasanthshettyy",
   linkedin: "https://linkedin.com/in/vasanthshettyy",
   currentFocus: "Building a startup-ready portfolio & AI-assisted tools",

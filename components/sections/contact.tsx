@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Mail, Copy, Check } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
+import { ResumeModal } from "@/components/resume-modal"
 import { personal } from "@/lib/data"
 import {
   AnimatedSection,
@@ -109,6 +110,15 @@ export function ContactSection() {
                 </Link>
               </Button>
             </div>
+            <ResumeModal>
+              <Button
+                id="contact-resume-btn"
+                variant="outline"
+                className="w-full gap-2 border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 rounded-2xl h-11 font-semibold ios-hover cursor-pointer"
+              >
+                View & Download Resume
+              </Button>
+            </ResumeModal>
           </AnimatedDiv>
 
           {/* Status availability badge */}
