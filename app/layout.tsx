@@ -1,28 +1,14 @@
 import type { Metadata } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
 import Script from "next/script"
 import { MotionConfig } from "framer-motion"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  display: "swap",
-})
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://vasanthshetty.dev"),
-  title: "Vasanth Shetty — Full-Stack Developer & Builder",
+  title: "Vasanth Shetty — Developer Portfolio",
   description:
-    "BCA student building AI-assisted full-stack products for startup environments. Projects include MakerHQ, AgroShare, Scam Guard, and CogniVault.",
+    "Monochrome developer portfolio showcasing full-stack systems, hackathon builds, and product-first engineering work.",
   keywords: [
     "Vasanth Shetty",
     "full-stack developer",
@@ -38,9 +24,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Vasanth Shetty — Full-Stack Developer & Builder",
+    title: "Vasanth Shetty — Developer Portfolio",
     description:
-      "Portfolio of a startup-minded full-stack developer. Real projects, real code, shipped products.",
+      "Monochrome portfolio of a startup-minded full-stack developer. Real systems, real code, shipped products.",
     url: "https://vasanthshetty.dev",
     siteName: "Vasanth Shetty Portfolio",
     images: [
@@ -56,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vasanth Shetty — Full-Stack Developer & Builder",
+    title: "Vasanth Shetty — Developer Portfolio",
     description:
-      "BCA student building AI-assisted full-stack products for startup environments.",
+      "Monochrome developer portfolio focused on full-stack systems and shipped product work.",
     images: ["/headshot.png"],
   },
 }
@@ -96,11 +82,7 @@ export default function RootLayout({
   }
 
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn(inter.variable, jetbrainsMono.variable)}
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <Script
           id="json-ld"
@@ -109,7 +91,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider defaultTheme="system">
           <MotionConfig reducedMotion="never">
             {children}
           </MotionConfig>

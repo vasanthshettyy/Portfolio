@@ -33,8 +33,8 @@ export const slideInRight: Variants = {
 
 // ─── Default transition ────────────────────────────────────────────────
 export const defaultTransition = {
-  duration: 0.5,
-  ease: [0.25, 0.4, 0.25, 1] as const,
+  duration: 0.32,
+  ease: [0.22, 1, 0.36, 1] as const,
 }
 
 // ─── Stagger container ─────────────────────────────────────────────────
@@ -42,8 +42,8 @@ export const staggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.05,
+      delayChildren: 0.04,
     },
   },
 }
@@ -52,19 +52,19 @@ export const staggerContainerSlow: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.08,
     },
   },
 }
 
 // ─── Hydration-safe Mount Hook ───────────────────────────────────────────
 export function useMounted() {
-  const [mounted, setMounted] = React.useState(false)
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-  return mounted
+  return React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
 }
 
 // ─── Hydration-safe Reduced Motion Hook ──────────────────────────────────
