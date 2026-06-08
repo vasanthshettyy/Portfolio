@@ -53,7 +53,7 @@ export function ResumeModal({ children }: ResumeModalProps) {
               className="w-8 h-8 border-white/[0.05] bg-surface/30 hover:bg-surface-raised/40 cursor-pointer text-muted-foreground hover:text-foreground"
               title="Open Raw PDF"
             >
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/assets/docs/resume.pdf" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </Button>
@@ -64,7 +64,7 @@ export function ResumeModal({ children }: ResumeModalProps) {
               className="w-8 h-8 border-white/[0.05] bg-surface/30 hover:bg-surface-raised/40 cursor-pointer text-muted-foreground hover:text-foreground"
               title="Download PDF"
             >
-              <a href="/resume.pdf" download="Vasanth_Shetty_Resume.pdf">
+              <a href="/assets/docs/resume.pdf" download="Vasanth_Shetty_Resume.pdf">
                 <Download className="w-3.5 h-3.5" />
               </a>
             </Button>
@@ -85,7 +85,7 @@ export function ResumeModal({ children }: ResumeModalProps) {
         {/* PDF viewer frame with scrollbar clipping */}
         <div className="flex-1 bg-black/20 relative w-full h-full min-h-0 overflow-hidden overscroll-none">
           <iframe
-            src="/resume.pdf#zoom=90&toolbar=1&navpanes=0&scrollbar=0"
+            src="/assets/docs/resume.pdf#zoom=90&toolbar=1&navpanes=0&scrollbar=0"
             className="border-none overflow-hidden max-w-none"
             scrolling="no"
             style={{ width: "calc(100% + 30px)", height: "100%", overflow: "hidden", marginLeft: "-15px", maxWidth: "none" }}
