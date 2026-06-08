@@ -4,7 +4,6 @@ import * as React from "react"
 import Link from "next/link"
 import { ExternalLink, ArrowRight, ChevronDown } from "lucide-react"
 import { GithubIcon } from "@/components/icons"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { projects } from "@/lib/data"
@@ -23,78 +22,44 @@ function ProjectCard({
   project: (typeof projects)[0]
 }) {
   const [expanded, setExpanded] = React.useState(false)
+  const [glowPosition, setGlowPosition] = React.useState({ x: 50, y: 40 })
   const prefersReducedMotion = useReducedMotion()
 
-  const [rotateX, setRotateX] = React.useState(0)
-  const [rotateY, setRotateY] = React.useState(0)
-  const [glowX, setGlowX] = React.useState(50)
-  const [glowY, setGlowY] = React.useState(50)
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
     if (prefersReducedMotion) return
-    const card = e.currentTarget
-    const box = card.getBoundingClientRect()
-    const x = e.clientX - box.left
-    const y = e.clientY - box.top
-    
-    const px = (x / box.width) * 100
-    const py = (y / box.height) * 100
-    setGlowX(px)
-    setGlowY(py)
-
-    const centerX = box.width / 2
-    const centerY = box.height / 2
-    // Limit rotation to max 5 degrees
-    const rX = ((y - centerY) / centerY) * -5
-    const rY = ((x - centerX) / centerX) * 5
-    setRotateX(rX)
-    setRotateY(rY)
-  }
-
-  const handleMouseLeave = () => {
-    setRotateX(0)
-    setRotateY(0)
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const x = ((event.clientX - bounds.left) / bounds.width) * 100
+    const y = ((event.clientY - bounds.top) / bounds.height) * 100
+    setGlowPosition({ x, y })
   }
 
   return (
     <AnimatedDiv variants={fadeUp}>
-      <motion.article
+      <article
         onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        animate={{
-          rotateX,
-          rotateY,
-          transformPerspective: 1000,
-        }}
-        transition={{ type: "spring", stiffness: 250, damping: 22 }}
-        className="card-surface group relative overflow-hidden bg-surface/30 backdrop-blur-xl border border-white/[0.05] flex flex-col gap-0 rounded-3xl shadow-md h-full transition-colors duration-300 hover:border-white/[0.12] select-none"
-        style={{
-          transformStyle: "preserve-3d",
-        }}
+        className="card-surface group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-surface shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.14]"
       >
-        {/* Cursor tracking glass light reflection glow */}
         {!prefersReducedMotion && (
           <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            aria-hidden="true"
             style={{
-              background: `radial-gradient(350px circle at ${glowX}% ${glowY}%, rgba(255, 255, 255, 0.05), transparent 80%)`,
+              background: `radial-gradient(420px circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(255,255,255,0.05), transparent 70%)`,
             }}
           />
         )}
-
-        {/* Header content */}
-        <div className="p-7 pb-5 flex flex-col gap-4 relative z-20">
-          <div className="flex items-start justify-between gap-4 flex-wrap">
-            <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex flex-col gap-4 p-7 pb-5">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
               <Badge
                 variant="outline"
-                className="text-[10px] font-semibold tracking-wider uppercase font-mono px-3 py-1 bg-surface-raised/40 text-foreground border-white/[0.05] rounded-full"
+                className="rounded-full border-white/[0.08] bg-background px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground"
               >
                 {project.type}
               </Badge>
               <span
-                className={`text-[10px] font-semibold tracking-wide uppercase font-mono ${
-                  project.status === "Completed" ? "text-emerald-500" : "text-amber-500"
+                className={`font-mono text-[10px] font-semibold uppercase tracking-wide ${
+                  project.status === "Completed" ? "text-white/80" : "text-white/55"
                 }`}
               >
                 ● {project.status}
@@ -107,9 +72,9 @@ function ProjectCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.name} GitHub repository`}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  className="rounded-full border border-white/[0.08] bg-background p-2 text-muted-foreground transition-colors duration-200 hover:text-foreground"
                 >
-                  <GithubIcon className="w-4.5 h-4.5" />
+                  <GithubIcon className="h-4 w-4" />
                 </Link>
               )}
               {project.live && (
@@ -118,55 +83,52 @@ function ProjectCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${project.name} live demo`}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  className="rounded-full border border-white/[0.08] bg-background p-2 text-muted-foreground transition-colors duration-200 hover:text-foreground"
                 >
-                  <ExternalLink className="w-4.5 h-4.5" />
+                  <ExternalLink className="h-4 w-4" />
                 </Link>
               )}
             </div>
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-xl font-bold text-foreground tracking-tight hover:text-primary transition-colors duration-200">
-              <Link href={`/projects/${project.slug}`}>
-                {project.name}
-              </Link>
+            <h3 className="text-2xl font-black tracking-[-0.04em] text-foreground transition-colors duration-200 group-hover:text-white">
+              <Link href={`/projects/${project.slug}`}>{project.name}</Link>
             </h3>
-            <p className="text-xs font-semibold text-muted-foreground tracking-wide font-mono uppercase">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               {project.tagline}
             </p>
           </div>
 
-          <p className="text-[13px] text-muted-foreground leading-relaxed">
+          <p className="text-[13px] leading-relaxed text-muted-foreground">
             {project.description}
           </p>
 
-          {/* Tech badges in aluminum outline format */}
           <div className="flex flex-wrap gap-1.5">
-            {project.tech.map((t) => (
+            {project.tech.map((tech) => (
               <Badge
-                key={t}
+                key={tech}
                 variant="secondary"
-                className="text-[10px] font-mono px-2.5 py-0.5 bg-surface-raised/20 text-muted-foreground border border-white/[0.04] rounded-full"
+                className="rounded-full border border-white/[0.08] bg-background px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground"
               >
-                {t}
+                {tech}
               </Badge>
             ))}
           </div>
         </div>
 
-        <div className="mt-auto relative z-20">
+        <div className="mt-auto">
           <Separator className="opacity-10" />
           <button
-            onClick={() => setExpanded(!expanded)}
-            className="w-full flex items-center justify-between px-7 py-4 text-xs font-semibold text-foreground/80 hover:text-foreground transition-colors duration-200 cursor-pointer"
+            onClick={() => setExpanded((value) => !value)}
+            className="flex w-full items-center justify-between px-7 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-foreground/75 transition-colors duration-200 hover:text-foreground"
           >
-            <span>TECHNICAL SPECS</span>
+            <span>Technical Specs</span>
             <motion.span
               animate={{ rotate: expanded ? 180 : 0 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="h-4 w-4" />
             </motion.span>
           </button>
 
@@ -176,61 +138,67 @@ function ProjectCard({
               height: expanded ? "auto" : 0,
               opacity: expanded ? 1 : 0,
             }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <div className="px-7 pb-6 space-y-4 border-t border-white/[0.04] bg-surface-raised/20">
-              <div className="pt-4">
-                <span className="label-mono text-[9px] block mb-1 font-semibold text-primary">ARCHITECTURE</span>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+            <div className="space-y-4 border-t border-white/[0.08] bg-background px-7 pb-6 pt-4">
+              <div className="space-y-1.5">
+                <span className="label-mono text-[9px] block text-muted-foreground">
+                  Architecture
+                </span>
+                <p className="text-xs leading-relaxed text-muted-foreground">
                   {project.architectureNote}
                 </p>
               </div>
-              <div>
-                <span className="label-mono text-[9px] block mb-1 font-semibold text-primary">PROBLEM & SOLUTION</span>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+              <div className="space-y-1.5">
+                <span className="label-mono text-[9px] block text-muted-foreground">
+                  Builder note
+                </span>
+                <p className="text-xs leading-relaxed text-muted-foreground">
                   {project.humanNote}
                 </p>
               </div>
-              <div className="pt-2">
+              <div>
                 <Link
                   href={`/projects/${project.slug}`}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-wide text-foreground hover:text-primary transition-colors duration-200"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground transition-colors duration-200 hover:text-white"
                 >
-                  Read full case study
-                  <ArrowRight className="w-3 h-3" />
+                  Read case study
+                  <ArrowRight className="h-3 w-3" />
                 </Link>
               </div>
             </div>
           </motion.div>
         </div>
-      </motion.article>
+      </article>
     </AnimatedDiv>
   )
 }
 
 export function ProjectsSection() {
   const featured = projects
-    .filter((p) => p.featured)
+    .filter((project) => project.featured)
     .sort((a, b) => a.order - b.order)
 
   return (
     <AnimatedSection id="projects" aria-label="Projects" className="py-28 px-6">
       <div className="mx-auto max-w-6xl">
-        {/* Section title */}
         <div className="mb-14 space-y-3">
-          <span className="label-mono tracking-wider font-semibold text-primary">Projects</span>
-          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-foreground">
-            Four types of work.{" "}
-            <span className="opacity-60 block text-foreground font-semibold">One pattern: ship it.</span>
+          <span className="label-mono tracking-wider font-semibold text-primary">
+            Projects
+          </span>
+          <h2 className="text-3xl font-bold tracking-tight text-foreground lg:text-4xl">
+            Four systems.{" "}
+            <span className="block font-semibold text-foreground/60">
+              One pattern: ship with intent.
+            </span>
           </h2>
-          <p className="text-muted-foreground text-[14px] leading-relaxed max-w-lg">
-            A comprehensive look at backend engineering, fast hackathon MVPs, and production SaaS structures.
+          <p className="max-w-lg text-[14px] leading-relaxed text-muted-foreground">
+            Backend engineering, hackathon velocity, and product-shaped interfaces.
           </p>
         </div>
 
-        {/* Project grid */}
-        <StaggerGroup className="grid lg:grid-cols-2 gap-6">
+        <StaggerGroup className="grid gap-6 lg:grid-cols-2">
           {featured.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}

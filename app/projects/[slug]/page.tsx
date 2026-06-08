@@ -1,7 +1,6 @@
-import * as React from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowLeft, ExternalLink, ShieldCheck, Database, Layout, Sparkles } from "lucide-react"
+import { ArrowLeft, ExternalLink, ShieldCheck, Database, Sparkles } from "lucide-react"
 import { GithubIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -47,13 +46,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           {/* Project Header Widget */}
-          <div className="card-surface p-8 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl mb-8 space-y-6">
+          <div className="card-surface mb-8 space-y-6 rounded-3xl border border-white/[0.08] bg-surface p-8">
             <div className="flex items-start justify-between gap-4 flex-wrap">
               <div className="space-y-2">
                 <div className="flex items-center gap-3.5 flex-wrap">
                   <Badge
                     variant="outline"
-                    className="text-[10px] font-semibold tracking-wider uppercase font-mono px-3 py-1 bg-surface-raised/40 text-foreground border-white/[0.05] rounded-full"
+                    className="rounded-full border border-white/[0.08] bg-background px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground"
                   >
                     {project.type}
                   </Badge>
@@ -80,7 +79,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     asChild
                     variant="outline"
                     size="sm"
-                    className="gap-2 border-white/[0.05] bg-surface/30 hover:bg-surface-raised/40 rounded-xl font-semibold ios-hover cursor-pointer"
+                    className="cursor-pointer gap-2 rounded-xl border border-white/[0.08] bg-background font-semibold ios-hover hover:bg-surface"
                   >
                     <Link
                       href={project.github}
@@ -96,7 +95,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   <Button
                     asChild
                     size="sm"
-                    className="gap-2 bg-foreground text-background hover:bg-foreground/90 rounded-xl font-semibold ios-hover cursor-pointer"
+                    className="cursor-pointer gap-2 rounded-xl bg-foreground font-semibold text-background hover:bg-foreground/90 ios-hover"
                   >
                     <Link
                       href={project.live}
@@ -141,9 +140,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {/* Detailed Content Cards */}
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* The Problem */}
-            <div className="card-surface p-7 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl space-y-3.5">
+            <div className="card-surface space-y-3.5 rounded-3xl border border-white/[0.08] bg-surface p-7">
               <div className="flex items-center gap-2.5">
-                <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-red-500/5 text-red-500 shrink-0">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-background text-white/75">
                   <ShieldCheck className="w-4 h-4" />
                 </span>
                 <span className="label-mono text-[10px] font-semibold text-muted-foreground">THE PROBLEM</span>
@@ -154,9 +153,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
 
             {/* The Design Architecture */}
-            <div className="card-surface p-7 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl space-y-3.5">
+            <div className="card-surface space-y-3.5 rounded-3xl border border-white/[0.08] bg-surface p-7">
               <div className="flex items-center gap-2.5">
-                <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-blue-500/5 text-blue-500 shrink-0">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-background text-white/75">
                   <Database className="w-4 h-4" />
                 </span>
                 <span className="label-mono text-[10px] font-semibold text-muted-foreground">ARCHITECTURE</span>
@@ -168,10 +167,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
 
           {/* Full Width Personal Learnings / Decisions */}
-          <div className="card-surface p-8 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl space-y-4">
+          <div className="card-surface space-y-4 rounded-3xl border border-white/[0.08] bg-surface p-8">
             <div className="flex items-center gap-2.5">
-              <span className="flex items-center justify-center w-9 h-9 rounded-2xl bg-amber-500/5 text-amber-500 shrink-0">
-                <Sparkles className="w-4.5 h-4.5" />
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-white/[0.08] bg-background text-white/75">
+                <Sparkles className="h-4 w-4" />
               </span>
               <span className="label-mono text-[10px] font-semibold text-muted-foreground">BUILDER PERSPECTIVE & STORY</span>
             </div>
