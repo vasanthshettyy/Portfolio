@@ -5,7 +5,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { Moon, Sun, Menu } from "lucide-react"
-import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/sheet"
 import { personal } from "@/lib/data"
 import { cn } from "@/lib/utils"
+import { useMounted } from "@/components/motion"
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -30,10 +30,9 @@ export function Navbar() {
   const { resolvedTheme, setTheme } = useTheme()
   const [scrolled, setScrolled] = React.useState(false)
   const [open, setOpen] = React.useState(false)
-  const [mounted, setMounted] = React.useState(false)
+  const mounted = useMounted()
 
   React.useEffect(() => {
-    setMounted(true)
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -44,7 +43,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 inset-x-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border/60 shadow-sm"
+          ? "bg-background/95 border-b border-white/[0.08] shadow-sm"
           : "bg-transparent"
       )}
     >

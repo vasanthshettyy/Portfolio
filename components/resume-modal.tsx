@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger, DialogClose } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Download, FileText, ExternalLink, X } from "lucide-react"
 
@@ -12,12 +12,16 @@ interface ResumeModalProps {
 export function ResumeModal({ children }: ResumeModalProps) {
   const [open, setOpen] = React.useState(false)
 
-  const trigger = React.isValidElement(children)
-    ? React.cloneElement(children as React.ReactElement<any>, {
-        onClick: (e: React.MouseEvent) => {
+  type TriggerProps = {
+    onClick?: React.MouseEventHandler<HTMLElement>
+  }
+
+  const trigger = React.isValidElement<TriggerProps>(children)
+    ? React.cloneElement(children, {
+        onClick: (e: React.MouseEvent<HTMLElement>) => {
           e.preventDefault()
           setOpen(true)
-          const childProps = (children as React.ReactElement<any>).props
+          const childProps = children.props
           if (childProps && typeof childProps.onClick === "function") {
             childProps.onClick(e)
           }
@@ -28,10 +32,10 @@ export function ResumeModal({ children }: ResumeModalProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {trigger}
-      <DialogContent showCloseButton={false} className="sm:max-w-4xl w-[95vw] md:w-[90vw] h-[85vh] p-0 bg-background/95 border border-white/[0.08] backdrop-blur-2xl rounded-2xl overflow-hidden flex flex-col gap-0 overscroll-none">
+      <DialogContent showCloseButton={false} className="sm:max-w-4xl w-[95vw] md:w-[90vw] h-[85vh] p-0 bg-background border border-white/[0.08] rounded-2xl overflow-hidden flex flex-col gap-0 overscroll-none">
         
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] bg-surface-raised/40 shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-surface shrink-0">
           <div className="flex items-center gap-3">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
               <FileText className="w-4 h-4" />

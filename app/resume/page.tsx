@@ -1,8 +1,7 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
-import { ArrowLeft, Printer, Mail, MapPin, GraduationCap, Award, Briefcase, Code2, ExternalLink } from "lucide-react"
+import { ArrowLeft, Printer, Mail, MapPin, GraduationCap, Award, Briefcase, Code2 } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -45,15 +44,15 @@ export default function ResumePage() {
           </div>
 
           {/* Resume Container (A4 Proportions on Screen, Flat on Print) */}
-          <div className="w-full bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl p-8 md:p-12 shadow-2xl print:shadow-none print:border-none print:bg-transparent print:p-0 print:rounded-none">
+          <div className="w-full rounded-3xl border border-white/[0.08] bg-surface p-8 shadow-2xl print:rounded-none print:border-none print:bg-transparent print:p-0 print:shadow-none md:p-12">
             
             {/* Header Block */}
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 pb-8 border-b border-white/[0.06] print:border-black/[0.1] print:pb-6">
+            <div className="flex flex-col gap-6 border-b border-white/[0.08] pb-8 print:border-black/[0.1] print:pb-6 md:flex-row md:items-start md:justify-between">
               <div className="space-y-2.5">
                 <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground print:text-black">
                   {personal.name}
                 </h1>
-                <p className="text-base font-semibold font-mono uppercase tracking-wider text-primary print:text-black/80">
+                <p className="font-mono text-base font-semibold uppercase tracking-wider text-primary print:text-black/80">
                   {personal.tagline}
                 </p>
                 <p className="text-sm text-muted-foreground max-w-xl leading-relaxed print:text-black/70 print:text-xs">
@@ -62,7 +61,7 @@ export default function ResumePage() {
               </div>
 
               {/* Contact Information */}
-              <div className="flex flex-col gap-2.5 text-xs text-muted-foreground font-mono print:text-black/80 print:text-[11px] shrink-0 md:text-right md:items-end">
+              <div className="flex shrink-0 flex-col gap-2.5 font-mono text-xs text-muted-foreground print:text-[11px] print:text-black/80 md:items-end md:text-right">
                 <span className="flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-primary print:text-black" />
                   {personal.location}
@@ -72,11 +71,11 @@ export default function ResumePage() {
                   {personal.email}
                 </a>
                 <a href={personal.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                  <GithubIcon className="w-3.5 h-3.5 text-primary print:text-black shrink-0" />
+                  <GithubIcon className="h-3.5 w-3.5 shrink-0 text-primary print:text-black" />
                   github.com/vasanthshettyy
                 </a>
                 <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                  <LinkedinIcon className="w-3.5 h-3.5 text-primary print:text-black shrink-0" />
+                  <LinkedinIcon className="h-3.5 w-3.5 shrink-0 text-primary print:text-black" />
                   linkedin.com/in/vasanthshettyy
                 </a>
               </div>
@@ -120,10 +119,10 @@ export default function ResumePage() {
                         </span>
                         <div className="flex flex-wrap gap-1">
                           {group.skills.map((skill) => (
-                            <Badge
+                    <Badge
                               key={skill}
                               variant="secondary"
-                              className="text-[9px] font-mono px-2 py-0.5 bg-surface-raised/40 text-foreground border border-white/[0.04] rounded-full print:bg-black/[0.05] print:text-black print:border-none"
+                              className="rounded-full border border-white/[0.08] bg-background px-2 py-0.5 font-mono text-[9px] text-foreground print:border-none print:bg-black/[0.05] print:text-black"
                             >
                               {skill}
                             </Badge>
