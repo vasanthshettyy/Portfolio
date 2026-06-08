@@ -143,8 +143,7 @@ The site should have a clear narrative, not just sections.
 6. Process / how you work
 7. GitHub / live links / portfolio links
 8. Contact / call to action
-9. Optional journal or build log
-10. Optional resume download
+9. Optional resume download
 
 ### Suggested routes
 Use a structure like this:
@@ -768,7 +767,6 @@ These elements help the site feel custom, not template-made.
 ## 23) Optional but strong additions
 
 If time allows, add:
-- a build log / changelog
 - a now page
 - a learning stack page
 - a lightweight blog later
