@@ -65,7 +65,7 @@ export function AboutSection() {
           {/* Desk Image - Apple Rounded squircle */}
           <StaggerGroup className="lg:col-span-2">
             <AnimatedDiv variants={scaleIn}>
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/[0.06] shadow-xl">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/[0.08] shadow-xl">
                 <Image
                   src="/desk.png"
                   alt="Vasanth Shetty at his build desk with laptop and books"
@@ -85,10 +85,10 @@ export function AboutSection() {
             const Icon = pillar.icon
             return (
               <AnimatedDiv key={pillar.title} variants={fadeUp}>
-                <div className="card-surface-raised p-7 h-full group ios-hover border border-white/[0.04] bg-surface-raised/40 hover:border-white/[0.1] rounded-3xl">
-                  <div className="flex items-start gap-4.5">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-2xl bg-foreground/[0.04] text-foreground shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                      <Icon className="w-4.5 h-4.5" />
+                <div className="card-surface-raised group h-full rounded-3xl border border-white/[0.08] p-7 ios-hover">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/[0.08] bg-background text-foreground transition-all duration-300 group-hover:border-white/20">
+                      <Icon className="h-4 w-4" />
                     </span>
                     <div className="space-y-1.5">
                       <h3 className="text-sm font-semibold text-foreground tracking-tight">
@@ -108,20 +108,20 @@ export function AboutSection() {
         {/* Apple widget education status panel */}
         <StaggerGroup className="mt-8">
           <AnimatedDiv variants={fadeUp}>
-            <div className="px-6 py-5 rounded-3xl border border-white/[0.05] bg-surface/30 backdrop-blur-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="flex flex-col justify-between gap-6 rounded-3xl border border-white/[0.08] bg-surface px-6 py-5 shadow-sm sm:flex-row sm:items-center">
               <div className="space-y-1">
                 <span className="label-mono text-[9px] block text-muted-foreground/75 font-semibold">DEGREE</span>
                 <span className="text-[14px] font-semibold text-foreground">
                   {personal.degree} — Computer Applications
                 </span>
               </div>
-              <div className="sm:border-l border-white/[0.06] sm:pl-8 flex-1 space-y-1">
+              <div className="flex-1 space-y-1 sm:border-l border-white/[0.08] sm:pl-8">
                 <span className="label-mono text-[9px] block text-muted-foreground/75 font-semibold">CGPA</span>
                 <span className="text-[14px] font-semibold text-foreground">
                   {personal.cgpa} / 10 <span className="text-[11px] text-muted-foreground font-normal">(up to Sem 5)</span>
                 </span>
               </div>
-              <div className="sm:border-l border-white/[0.06] sm:pl-8 space-y-1">
+              <div className="space-y-1 sm:border-l border-white/[0.08] sm:pl-8">
                 <span className="label-mono text-[9px] block text-muted-foreground/75 font-semibold">GRADUATING YEAR</span>
                 <span className="text-[14px] font-semibold text-foreground">
                   {personal.graduationYear}

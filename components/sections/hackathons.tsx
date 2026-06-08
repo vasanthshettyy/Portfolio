@@ -7,7 +7,6 @@ import {
   AnimatedSection,
   AnimatedDiv,
   StaggerGroup,
-  fadeUp,
   slideInLeft,
 } from "@/components/motion"
 
@@ -34,10 +33,7 @@ export function HackathonsSection() {
         {/* Timeline block */}
         <div className="relative">
           {/* Subtle vertical silver-gray divider line */}
-          <div
-            className="absolute left-5 top-0 bottom-0 w-px bg-white/[0.06] hidden sm:block"
-            aria-hidden="true"
-          />
+          <div className="absolute bottom-0 top-0 left-5 hidden w-px bg-white/[0.08] sm:block" aria-hidden="true" />
 
           <StaggerGroup slow className="flex flex-col gap-6">
             {hackathons.map((h, i) => (
@@ -48,11 +44,13 @@ export function HackathonsSection() {
                   aria-hidden="true"
                 />
 
-                <div className="card-surface ios-hover p-6 bg-surface/30 border border-white/[0.05] rounded-3xl group">
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+                <div className="card-surface group rounded-3xl border border-white/[0.08] bg-surface p-6 ios-hover">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-8">
                     {/* Event Year label */}
                     <div className="shrink-0">
-                      <span className="label-mono text-primary font-semibold text-xs tracking-wider">{h.year}</span>
+                      <span className="label-mono text-xs font-semibold tracking-wider text-primary">
+                        {h.year}
+                      </span>
                     </div>
 
                     <div className="flex-1 space-y-4">
@@ -61,31 +59,31 @@ export function HackathonsSection() {
                         <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-300 flex flex-wrap items-center gap-x-2 gap-y-1">
                           <span>{h.name}</span>
                           {"location" in h && (
-                            <span className="text-xs font-normal text-muted-foreground/60 font-mono">
-                              ({h.location})
-                            </span>
-                          )}
-                        </h3>
-                        <p className="text-[13px] font-medium text-muted-foreground leading-relaxed">
+                          <span className="font-mono text-xs font-normal text-muted-foreground/60">
+                            ({h.location})
+                          </span>
+                        )}
+                      </h3>
+                        <p className="text-[13px] font-medium leading-relaxed text-muted-foreground">
                           {h.outcome}
                         </p>
                       </div>
 
                       {/* Timeline metadata badges */}
                       <div className="flex flex-wrap gap-2.5 items-center">
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-                          <Users className="w-3.5 h-3.5 text-muted-foreground/60" />
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                          <Users className="h-3.5 w-3.5 text-muted-foreground/60" />
                           <span>{h.role}</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-                          <Timer className="w-3.5 h-3.5 text-muted-foreground/60" />
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                          <Timer className="h-3.5 w-3.5 text-muted-foreground/60" />
                           <span>{h.duration}</span>
                         </div>
                         {h.tags.map((tag) => (
                           <Badge
                             key={tag}
                             variant="secondary"
-                            className="text-[10px] font-mono px-2.5 py-0.5 bg-surface-raised/35 text-muted-foreground border border-white/[0.04] rounded-full"
+                            className="rounded-full border border-white/[0.08] bg-background px-2.5 py-0.5 font-mono text-[10px] text-muted-foreground"
                           >
                             {tag}
                           </Badge>

@@ -50,10 +50,10 @@ export function ProcessSection() {
             const Icon = iconMap[step.icon]
             return (
               <AnimatedDiv key={step.step} variants={fadeUp}>
-                <div className="card-surface-raised ios-hover p-7 h-full border border-white/[0.04] bg-surface-raised/40 hover:border-white/[0.1] rounded-3xl relative overflow-hidden group">
+                <div className="card-surface-raised group relative h-full overflow-hidden rounded-3xl border border-white/[0.08] bg-surface p-7 ios-hover">
                   {/* Step number — large luxury background typography */}
                   <span
-                    className="absolute -bottom-5 -right-2 text-8xl font-black text-foreground/[0.02] font-mono select-none pointer-events-none group-hover:text-primary/[0.04] transition-colors duration-500"
+                    className="pointer-events-none absolute -bottom-5 -right-2 select-none font-mono text-8xl font-black text-foreground/[0.03] transition-colors duration-500 group-hover:text-foreground/[0.05]"
                     aria-hidden="true"
                   >
                     {step.step}
@@ -61,10 +61,10 @@ export function ProcessSection() {
 
                   <div className="relative z-10 space-y-4">
                     <div className="flex items-center gap-3">
-                      <span className="flex items-center justify-center w-9 h-9 rounded-2xl bg-foreground/[0.04] text-foreground shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                        <Icon className="w-4 h-4" />
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-white/[0.08] bg-background text-foreground transition-all duration-300 group-hover:border-white/20">
+                        <Icon className="h-4 w-4" />
                       </span>
-                      <span className="label-mono text-primary font-semibold text-[10px] tracking-wide">
+                      <span className="label-mono text-[10px] font-semibold tracking-wide text-primary">
                         STEP {step.step}
                       </span>
                     </div>

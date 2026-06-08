@@ -32,13 +32,13 @@ function CopyEmail() {
     <button
       id="contact-copy-email"
       onClick={copy}
-      className="group flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 transition-all duration-300 w-full text-left cursor-pointer shadow-sm"
+      className="group flex w-full cursor-pointer items-center gap-3 rounded-2xl border border-white/[0.08] bg-surface px-5 py-4 text-left transition-all duration-300 hover:bg-surface-raised"
       aria-label="Copy email address"
     >
-      <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-foreground/[0.04] text-foreground shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-        <Mail className="w-4 h-4 shrink-0" />
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-background text-foreground transition-all duration-300 group-hover:border-white/20">
+        <Mail className="h-4 w-4 shrink-0" />
       </div>
-      <span className="text-sm font-semibold text-foreground/90 font-mono tracking-tight">
+      <span className="font-mono text-sm font-semibold tracking-tight text-foreground/90">
         {personal.email}
       </span>
       <span className="ml-auto">
@@ -83,7 +83,7 @@ export function ContactSection() {
                 id="contact-github-btn"
                 asChild
                 variant="outline"
-                className="gap-2 border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 rounded-2xl h-11 font-semibold ios-hover cursor-pointer"
+                className="h-11 cursor-pointer gap-2 rounded-2xl border border-white/[0.08] bg-background font-semibold ios-hover hover:bg-surface"
               >
                 <Link
                   href={personal.github}
@@ -98,7 +98,7 @@ export function ContactSection() {
                 id="contact-linkedin-btn"
                 asChild
                 variant="outline"
-                className="gap-2 border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 rounded-2xl h-11 font-semibold ios-hover cursor-pointer"
+                className="h-11 cursor-pointer gap-2 rounded-2xl border border-white/[0.08] bg-background font-semibold ios-hover hover:bg-surface"
               >
                 <Link
                   href={personal.linkedin}
@@ -114,7 +114,7 @@ export function ContactSection() {
               <Button
                 id="contact-resume-btn"
                 variant="outline"
-                className="w-full gap-2 border-white/[0.05] bg-surface/30 backdrop-blur-xl hover:bg-surface-raised/40 rounded-2xl h-11 font-semibold ios-hover cursor-pointer"
+                className="h-11 w-full cursor-pointer gap-2 rounded-2xl border border-white/[0.08] bg-background font-semibold ios-hover hover:bg-surface"
               >
                 View & Download Resume
               </Button>
@@ -126,7 +126,7 @@ export function ContactSection() {
             variants={fadeUp}
             className="flex items-center justify-center gap-2 pt-4"
           >
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.06] bg-surface/40 backdrop-blur-md shadow-sm">
+            <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-surface px-3 py-1 shadow-sm">
               <span className="pulse-dot animate-pulse" aria-hidden="true" />
               <span className="text-[10px] font-semibold tracking-wide text-muted-foreground uppercase">
                 {personal.availability}

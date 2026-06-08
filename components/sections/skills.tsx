@@ -27,18 +27,14 @@ const iconMap: Record<string, React.ElementType> = {
   Lightbulb,
 }
 
-const provenSkills = new Set([
+const usedAndShippedSkills = new Set([
   "JavaScript",
-  "TypeScript",
   "PHP",
   "SQL",
   "React",
-  "Next.js",
   "Tailwind CSS",
   "PHP (Native)",
   "Node.js",
-  "Next.js API Routes",
-  "REST APIs",
   "Authentication Systems",
   "MySQL",
   "Supabase (PostgreSQL)",
@@ -49,6 +45,8 @@ const provenSkills = new Set([
   "AI-Assisted Development",
   "Rapid Prototyping",
   "System Architecture",
+  "HTML",
+  "CSS",
 ])
 
 export function SkillsSection() {
@@ -75,7 +73,7 @@ export function SkillsSection() {
             <Tabs defaultValue={skillGroups[0].category} className="w-full">
               {/* Tab list with Apple premium macOS Segmented Control styling */}
               <TabsList
-                className="flex flex-wrap h-auto gap-1 bg-surface-raised/30 border border-white/[0.05] p-1 rounded-2xl mb-8 backdrop-blur-xl"
+                className="mb-8 flex h-auto flex-wrap gap-1 rounded-2xl border border-white/[0.08] bg-background p-1"
                 role="tablist"
               >
                 {skillGroups.map((group) => {
@@ -85,8 +83,8 @@ export function SkillsSection() {
                       key={group.category}
                       value={group.category}
                       id={`skills-tab-${group.category.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl transition-all duration-300 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground cursor-pointer"
-                    >
+                    className="flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold text-muted-foreground transition-all duration-300 data-[state=active]:bg-foreground data-[state=active]:text-background data-[state=active]:shadow-sm hover:text-foreground"
+                  >
                       <Icon className="w-3.5 h-3.5" />
                       {group.category}
                     </TabsTrigger>
@@ -101,22 +99,22 @@ export function SkillsSection() {
                   value={group.category}
                   className="mt-0 focus-visible:outline-none"
                 >
-                  <div className="card-surface p-8 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl">
+                  <div className="card-surface rounded-3xl border border-white/[0.08] bg-surface p-8">
                     <div className="flex flex-wrap gap-2.5">
                       {group.skills.map((skill) => {
-                        const isProven = provenSkills.has(skill)
+                        const isUsedAndShipped = usedAndShippedSkills.has(skill)
                         return (
                           <Badge
                             key={skill}
-                            variant={isProven ? "default" : "secondary"}
+                            variant={isUsedAndShipped ? "default" : "secondary"}
                             className={
-                              isProven
+                              isUsedAndShipped
                                 ? "px-4 py-1.5 text-xs font-mono font-medium rounded-full cursor-default bg-foreground text-background border-none hover:opacity-90 transition-all duration-300 scale-95 hover:scale-100 shadow-sm"
-                                : "px-4 py-1.5 text-xs font-mono font-medium rounded-full cursor-default bg-surface-raised/40 text-foreground border border-white/[0.05] hover:bg-surface-raised/80 transition-all duration-300 scale-95 hover:scale-100"
+                                : "px-4 py-1.5 text-xs font-mono font-medium rounded-full cursor-default bg-background text-foreground border border-white/[0.08] hover:bg-surface transition-all duration-300 scale-95 hover:scale-100"
                             }
                           >
                             {skill}
-                            {isProven && (
+                            {isUsedAndShipped && (
                               <span className="ml-2 w-1.5 h-1.5 rounded-full bg-background inline-block animate-pulse" />
                             )}
                           </Badge>
@@ -125,10 +123,10 @@ export function SkillsSection() {
                     </div>
 
                     {/* Highly premium Apple-style Legend */}
-                    <div className="mt-8 pt-5 border-t border-white/[0.04] flex flex-wrap items-center gap-6 text-[11px] text-muted-foreground font-medium font-mono">
+                    <div className="mt-8 flex flex-wrap items-center gap-6 border-t border-white/[0.08] pt-5 font-mono text-[11px] font-medium text-muted-foreground">
                       <span className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-foreground inline-block" />
-                        Used in shipped projects
+                        Used and shipped
                       </span>
                       <span className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-surface-raised/80 border border-white/[0.06] inline-block" />

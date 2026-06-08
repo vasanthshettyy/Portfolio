@@ -1,8 +1,6 @@
-import * as React from "react"
 import Link from "next/link"
 import { ArrowLeft, Clock, Hammer, GitCommit, Sparkles } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 
@@ -94,7 +92,7 @@ export default function BuildLogPage() {
                 </span>
 
                 {/* Log card */}
-                <div className="card-surface p-7 bg-surface/30 backdrop-blur-xl border border-white/[0.05] rounded-3xl space-y-4 shadow-sm hover:border-white/[0.08] transition-all duration-300">
+                <div className="card-surface rounded-3xl border border-white/[0.08] bg-surface p-7 space-y-4 shadow-sm transition-all duration-300 hover:border-white/[0.14]">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2.5">
@@ -104,7 +102,7 @@ export default function BuildLogPage() {
                         </span>
                         <Badge
                           variant="outline"
-                          className={`text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-full border-none ${
+                          className={`rounded-full border-none px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider ${
                             log.category === "Release"
                               ? "bg-emerald-500/10 text-emerald-500"
                               : log.category === "Feature"
@@ -143,7 +141,7 @@ export default function BuildLogPage() {
                       </div>
                     )}
                     {log.metrics && (
-                      <span className="text-[10px] font-mono font-semibold text-primary flex items-center gap-1">
+                        <span className="flex items-center gap-1 font-mono text-[10px] font-semibold text-primary">
                         <Sparkles className="w-3 h-3" />
                         {log.metrics}
                       </span>
